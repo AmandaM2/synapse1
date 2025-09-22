@@ -1,0 +1,36 @@
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  
+  .logo a {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #3f51b5; // Um azul índigo, remete à ciência
+  }
+  
+  .main-nav ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 1.5rem; // Espaçamento entre os itens
+  }
+  
+  .main-nav a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding: 0.5rem;
+    transition: color 0.3s ease;
+  
+    &:hover {
+      color: #3f51b5;
+    }
+  }
