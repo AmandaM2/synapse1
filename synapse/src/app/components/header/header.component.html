@@ -5,7 +5,14 @@
     <nav class="main-nav">
       <ul>
         <li><a routerLink ="/novo-projeto">Publicar Projeto</a></li>
-        <li><a routerLink ="/login">Login</a></li>
+
+        <li *ngIf="!isLoggedIn">
+          <a routerLink="/login">Login</a>
+        </li>
+
+        <li *ngIf="isLoggedIn">
+          <a href="#"(click)="onLogout()">Logout</a>
+        </li>
       </ul>
     </nav>
   </header>

@@ -70,7 +70,15 @@
     &:hover {
       background-color: #303f9f;
     }
+
+    &:disabled {
+      background-color: #b0bec5; // Um tom de cinza azulado
+      color: #607d8b;          // Cor do texto mais escura para contraste
+      cursor: not-allowed;       // O cursor do mouse vira um ícone de 'proibido'
+      opacity: 0.8;              // Deixa o botão um pouco mais transparente
+    }
   }
+  
   
   .register-link {
     margin-top: 1.5rem;
