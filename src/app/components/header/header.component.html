@@ -4,7 +4,9 @@
     </div>
     <nav class="main-nav">
       <ul>
-        <li><a routerLink ="/novo-projeto">Publicar Projeto</a></li>
+        <li *ngIf="isLoggedIn">
+          <a routerLink ="/novo-projeto">Publicar Projeto</a>
+        </li>
 
         <li *ngIf="!isLoggedIn">
           <a routerLink="/login">Login</a>

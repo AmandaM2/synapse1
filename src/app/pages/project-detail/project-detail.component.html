@@ -1,0 +1,25 @@
+<div class="detail-container">
+    <div *ngIf="project; else notFound">
+      <h1 class="project-title">{{ project.title }}</h1>
+      <p class="project-authors"><strong>Por:</strong> {{ project.authors }}</p>
+      <p class="publication-date">
+        <strong>Publicado em:</strong> {{ project.publicationDate | date: 'fullDate' }}
+      </p>
+      <hr>
+      <div class="project-content">
+        <h3>Resumo</h3>
+        <p>{{ project.summary }}</p>
+        <h3>Descrição Completa</h3>
+        <p class="description-text">{{ project.description }}</p>
+      </div>
+      <a routerLink="/" class="back-link">← Voltar para o Feed</a>
+    </div>
+  
+    <ng-template #notFound>
+      <div class="not-found-card">
+        <h2>Projeto Não Encontrado</h2>
+        <p>O projeto que você está a procurar não existe ou foi removido.</p>
+        <a routerLink="/" class="back-link">← Voltar para o Feed</a>
+      </div>
+    </ng-template>
+  </div>

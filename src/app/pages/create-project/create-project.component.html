@@ -1,1 +1,33 @@
-<p>create-project works!</p>
+<div class="form-container">
+    <div class="form-card">
+      <h2>Publicar Novo Projeto</h2>
+      <p>Compartilhe seu trabalho com a comunidade científica.</p>
+  
+      <form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+  
+        <div class="form-group">
+          <label for="title">Título do Projeto</label>
+          <input type="text" id="title" formControlName="title">
+          </div>
+  
+        <div class="form-group">
+          <label for="authors">Autores</label>
+          <input type="text" id="authors" formControlName="authors" placeholder="Ex: Santos, J.; Silva, M.">
+        </div>
+  
+        <div class="form-group">
+          <label for="summary">Resumo (Máx. 300 caracteres)</label>
+          <textarea id="summary" rows="4" formControlName="summary"></textarea>
+        </div>
+  
+        <div class="form-group">
+          <label for="description">Descrição Completa</label>
+          <textarea id="description" rows="10" formControlName="description"></textarea>
+        </div>
+  
+        <button type="submit" class="submit-button" [disabled]="projectForm.invalid">
+          Publicar
+        </button>
+      </form>
+    </div>
+  </div>
