@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 // Validador Personalizado: Verifica se dois campos coincidem
 export function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
@@ -18,14 +19,16 @@ export function passwordMatchValidator(control: AbstractControl): ValidationErro
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
 
-  constructor(private router: Router) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService) {}
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -46,7 +49,9 @@ export class RegisterComponent implements OnInit {
       this.registerForm.markAllAsTouched(); 
       return;
     }
-    console.log('Dados de cadastro:', this.registerForm.value);
+    const { confirmPassword, ...registrationData } = this.registerForm.value;
+    this.authService.register(registrationData);
+
     alert('Cadastro realizado com sucesso! Você será redirecionado para o login.');
     this.router.navigate(['/login']);
   }

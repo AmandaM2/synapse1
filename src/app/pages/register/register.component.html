@@ -31,7 +31,10 @@
         <div class="form-group-checkbox">
           <input type="checkbox" id="lgpdConsent" formControlName="lgpdConsent">
           <label for="lgpdConsent">
-            Eu li e concordo com os <a href="/termos" target="_blank">Termos de Serviço</a> e a <a href="/privacidade" target="_blank">Política de Privacidade</a>.
+            Eu li e concordo com os 
+            <a routerLink="/termos" target="_blank">Termos de Serviço</a> 
+            e a 
+            <a routerLink="/privacidade" target="_blank">Política de Privacidade</a>.
           </label>
           <div *ngIf="registerForm.get('lgpdConsent')?.invalid && registerForm.get('lgpdConsent')?.touched" class="error-message">
             <small>Você precisa de aceitar os termos para se cadastrar.</small>
