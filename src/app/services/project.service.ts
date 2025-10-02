@@ -46,5 +46,22 @@ export class ProjectService {
       getProjectById(id: string): Project | undefined {
       return this.projects.find(p => p.id === id);
     }
-
+    deleteProject(id: string): void {
+      // O método filter() cria um novo array com todos os elementos
+      // que passam no teste. Neste caso, todos os projetos cujo ID
+      // NÃO é igual ao que queremos excluir.
+      this.projects = this.projects.filter(project => project.id !== id);
+      console.log('Projeto excluído. Lista atual:', this.projects);
+    }
+    updateProject(id: string, updatedData: { title: string, authors: string, summary: string, description: string }): void {
+      const projectIndex = this.projects.findIndex(p => p.id === id);
+      if (projectIndex > -1) {
+        this.projects[projectIndex] = {
+          ...this.projects[projectIndex], // Mantém o id e a data de publicação originais
+          ...updatedData // Sobrescreve os outros campos com os novos dados
+        };
+        console.log('Projeto atualizado!', this.projects[projectIndex]);
+      }
+    }
+    
 }

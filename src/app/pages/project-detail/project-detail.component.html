@@ -23,3 +23,12 @@
       </div>
     </ng-template>
   </div>
+
+  <div class="actions-footer">
+    <a routerLink="/" class="back-link">← Voltar para o Feed</a>
+
+    <div *ngIf="isLoggedIn" class="admin-actions">
+      <button class="action-button edit-button" [routerLink]="['/projeto', project?.id, 'editar']">Editar</button>
+      <button class="action-button delete-button" (click)="onDelete()">Excluir</button>
+    </div>
+</div>

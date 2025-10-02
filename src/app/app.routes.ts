@@ -7,6 +7,7 @@ import { authGuard } from './guards/auth.guard';
 import { RegisterComponent } from './pages/register/register.component';
 import { TermsOfServiceComponent } from './pages/terms-of-service/terms-of-service.component';
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
+import { ProjectEditComponent } from './pages/project-edit/project-edit.component';
 
 
 export const routes: Routes = [
@@ -18,5 +19,6 @@ export const routes: Routes = [
     { path: 'novo-projeto', component: CreateProjectComponent, canActivate:[authGuard]},
 
     { path: 'projeto/:id', component: ProjectDetailComponent},
+    { path: 'projeto/:id/editar', component: ProjectEditComponent, canActivate: [authGuard]},
     { path: '**', redirectTo: '', pathMatch:'full'}
 ];
