@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Project } from '../models/project.model'; // 1. Importe a nossa interface
+import { Project } from '../models/project.model';
+import { Comment } from '../models/comment.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  // 2. Uma lista privada para guardar os projetos.
-  // Começa com um projeto de exemplo para não termos a página vazia.
   private projects: Project[] = [
     {
       id: '1',
@@ -14,54 +13,73 @@ export class ProjectService {
       authors: 'Dra. Elisa Antunes',
       summary: 'Este projeto utiliza simulações avançadas para modelar o comportamento da matéria ao redor de buracos negros, oferecendo novas perspetivas sobre a gravidade quântica.',
       description: 'Descrição completa do projeto sobre buracos negros...',
-      publicationDate: new Date()
+      publicationDate: new Date(),
+      likes: 15,
+      comments: []
     }
   ];
 
   constructor() { }
 
-  // 3. Método para obter todos os projetos
   getProjects(): Project[] {
-    // Retornamos uma cópia do array para evitar modificações acidentais
     return [...this.projects];
   }
 
-  // 4. Método para adicionar um novo projeto
   addProject(projectData: { title: string, authors: string, summary: string, description: string }): void {
     const newProject: Project = {
-      id: new Date().getTime().toString(), // Um ID único baseado no tempo atual
+      id: new Date().getTime().toString(),
       title: projectData.title,
       authors: projectData.authors,
       summary: projectData.summary,
       description: projectData.description,
-      publicationDate: new Date()
+      publicationDate: new Date(),
+      likes: 0,
+      comments: []
     };
-
-    // Adiciona o novo projeto ao início da lista (para aparecer primeiro)
     this.projects.unshift(newProject);
-
-
     console.log('Projeto adicionado!', this.projects);
   }
-      getProjectById(id: string): Project | undefined {
-      return this.projects.find(p => p.id === id);
+
+  getProjectById(id: string): Project | undefined {
+    return this.projects.find(p => p.id === id);
+  }
+
+  deleteProject(id: string): void {
+    this.projects = this.projects.filter(project => project.id !== id);
+    console.log('Projeto excluído. Lista atual:', this.projects);
+  }
+
+  updateProject(id: string, updatedData: { title: string, authors: string, summary: string, description: string }): void {
+    const projectIndex = this.projects.findIndex(p => p.id === id);
+    if (projectIndex > -1) {
+      this.projects[projectIndex] = {
+        ...this.projects[projectIndex],
+        ...updatedData
+      };
+      console.log('Projeto atualizado!', this.projects[projectIndex]);
     }
-    deleteProject(id: string): void {
-      // O método filter() cria um novo array com todos os elementos
-      // que passam no teste. Neste caso, todos os projetos cujo ID
-      // NÃO é igual ao que queremos excluir.
-      this.projects = this.projects.filter(project => project.id !== id);
-      console.log('Projeto excluído. Lista atual:', this.projects);
+  }
+
+  likeProject(id: string): void {
+    const project = this.projects.find(p => p.id === id);
+    if (project) {
+      project.likes++;
+      console.log(`Projeto ${id} curtido. Total de curtidas: ${project.likes}`);
     }
-    updateProject(id: string, updatedData: { title: string, authors: string, summary: string, description: string }): void {
-      const projectIndex = this.projects.findIndex(p => p.id === id);
-      if (projectIndex > -1) {
-        this.projects[projectIndex] = {
-          ...this.projects[projectIndex], // Mantém o id e a data de publicação originais
-          ...updatedData // Sobrescreve os outros campos com os novos dados
-        };
-        console.log('Projeto atualizado!', this.projects[projectIndex]);
-      }
+  }
+
+  addComment(projectId: string, commentText: string): void {
+    const project = this.projects.find(p => p.id === projectId);
+    if (project) {
+      const newComment: Comment = {
+        id: new Date().getTime().toString(),
+        authorName: 'Utilizador Anónimo', // Numa app real, viria do AuthService
+        text: commentText,
+        timestamp: new Date()
+      };
+      project.comments.push(newComment);
+      console.log(`Comentário adicionado ao projeto ${projectId}`);
     }
-    
-}
+  }
+
+} 

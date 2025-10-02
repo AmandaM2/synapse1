@@ -1,20 +1,29 @@
 <div class="feed-container">
-    <h1 class="feed-title">Projetos Recentes</h1>
-  
-    <div *ngFor="let project of projects" class="project-card">
-      <h2 class="project-title">{{ project.title }}</h2>
-      <p class="project-authors"><strong>Autores:</strong> {{ project.authors }}</p>
-      <p class="project-summary">{{ project.summary }}</p>
+  <h1 class="feed-title">Projetos Recentes</h1>
+
+  <div *ngFor="let project of projects" class="project-card">
+    <h2 class="project-title">{{ project.title }}</h2>
+    <p class="project-authors"><strong>Autores:</strong> {{ project.authors }}</p>
+    <p class="project-summary">{{ project.summary }}</p>
+    <div class="card-footer">
+      <span class="publication-date">
+        Publicado em: {{ project.publicationDate | date: 'dd/MM/yyyy' }}
+      </span>
+      <a [routerLink]="['/projeto', project.id]" class="read-more-link">Ler Mais</a>
       <div class="card-footer">
         <span class="publication-date">
           Publicado em: {{ project.publicationDate | date: 'dd/MM/yyyy' }}
         </span>
+
+        <span class="likes-count-feed">❤️ {{ project.likes }}</span>
+
         <a [routerLink]="['/projeto', project.id]" class="read-more-link">Ler Mais</a>
       </div>
     </div>
-  
-    <div *ngIf="projects.length === 0" class="no-projects-message">
-      <p>Ainda não há projetos publicados. Seja o primeiro a partilhar!</p>
-      <a routerLink="/novo-projeto" class="publish-first-link">Publicar um Projeto</a>
-    </div>
   </div>
+
+  <div *ngIf="projects.length === 0" class="no-projects-message">
+    <p>Ainda não há projetos publicados. Seja o primeiro a partilhar!</p>
+    <a routerLink="/novo-projeto" class="publish-first-link">Publicar um Projeto</a>
+  </div>
+</div>
