@@ -32,15 +32,22 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
-      name: new FormControl(null, Validators.required),
-      email: new FormControl(null, [Validators.required, Validators.email]),
-      password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
-      confirmPassword: new FormControl(null, [Validators.required]),
-      // Validador específico da LGPD: o campo deve ser `true` para ser válido.
-      lgpdConsent: new FormControl(false, Validators.requiredTrue) 
-    }, { 
-      validators: passwordMatchValidator // Aplicamos o nosso validador personalizado ao formulário inteiro
-    });
+  name: new FormControl(null, Validators.required),
+  email: new FormControl(null, [Validators.required, Validators.email]),
+  password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
+  confirmPassword: new FormControl(null, [Validators.required]),
+
+  // ===== NOVOS CAMPOS ADICIONADOS AQUI =====
+  age: new FormControl(null, [Validators.required, Validators.min(16)]), // Idade obrigatória e mínima de 16
+  profession: new FormControl(null, Validators.required),
+  interests: new FormControl(null, Validators.required),
+  // ===========================================
+
+  lgpdConsent: new FormControl(false, Validators.requiredTrue) 
+}, { 
+  validators: passwordMatchValidator
+});
+
   }
 
   onSubmit(): void {

@@ -1,50 +1,63 @@
 <div class="form-container">
-    <div class="form-card">
-      <h2>Criar Conta</h2>
-      <p>Junte-se à comunidade Synapse.</p>
-  
-      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-  
-        <div class="form-group">
-          <label for="name">Nome Completo</label>
-          <input type="text" id="name" formControlName="name">
+  <div class="form-card">
+    <h2>Criar Conta</h2>
+    <p>Junte-se à comunidade Synapse.</p>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      
+      <div class="form-group">
+        <label for="name">Nome Completo</label>
+        <input type="text" id="name" formControlName="name">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" formControlName="email">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Senha (mínimo 6 caracteres)</label>
+        <input type="password" id="password" formControlName="password">
+      </div>
+      
+      <div class="form-group">
+        <label for="confirmPassword">Confirmar Senha</label>
+        <input type="password" id="confirmPassword" formControlName="confirmPassword">
+        <div *ngIf="registerForm.errors?.['passwordsNotMatching'] && registerForm.get('confirmPassword')?.touched" class="error-message">
+          <small>As senhas não coincidem.</small>
         </div>
-  
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" formControlName="email">
+      </div> <div class="form-group">
+        <label for="age">Idade</label>
+        <input type="number" id="age" formControlName="age">
+        <div *ngIf="registerForm.get('age')?.invalid && registerForm.get('age')?.touched" class="error-message">
+          <small *ngIf="registerForm.get('age')?.errors?.['required']">A idade é obrigatória.</small>
+          <small *ngIf="registerForm.get('age')?.errors?.['min']">Você deve ter pelo menos 16 anos.</small>
         </div>
-  
-        <div class="form-group">
-          <label for="password">Senha (mínimo 6 caracteres)</label>
-          <input type="password" id="password" formControlName="password">
+      </div>
+
+      <div class="form-group">
+        <label for="profession">Profissão</label>
+        <input type="text" id="profession" formControlName="profession">
+      </div>
+
+      <div class="form-group">
+        <label for="interests">Campo de Interesse Principal</label>
+        <input type="text" id="interests" formControlName="interests" placeholder="Ex: Astrofísica, Biologia Molecular...">
+      </div>
+      
+      <div class="form-group-checkbox">
+        <input type="checkbox" id="lgpdConsent" formControlName="lgpdConsent">
+        <label for="lgpdConsent">
+          Eu li e concordo com os <a routerLink="/termos" target="_blank">Termos de Serviço</a> e a <a routerLink="/privacidade" target="_blank">Política de Privacidade</a>.
+        </label>
+        <div *ngIf="registerForm.get('lgpdConsent')?.invalid && registerForm.get('lgpdConsent')?.touched" class="error-message">
+          <small>Você precisa de aceitar os termos para se cadastrar.</small>
         </div>
-  
-        <div class="form-group">
-          <label for="confirmPassword">Confirmar Senha</label>
-          <input type="password" id="confirmPassword" formControlName="confirmPassword">
-          <div *ngIf="registerForm.errors?.['passwordsNotMatching'] && registerForm.get('confirmPassword')?.touched" class="error-message">
-            <small>As senhas não coincidem.</small>
-          </div>
-        </div>
-  
-        <div class="form-group-checkbox">
-          <input type="checkbox" id="lgpdConsent" formControlName="lgpdConsent">
-          <label for="lgpdConsent">
-            Eu li e concordo com os 
-            <a routerLink="/termos" target="_blank">Termos de Serviço</a> 
-            e a 
-            <a routerLink="/privacidade" target="_blank">Política de Privacidade</a>.
-          </label>
-          <div *ngIf="registerForm.get('lgpdConsent')?.invalid && registerForm.get('lgpdConsent')?.touched" class="error-message">
-            <small>Você precisa de aceitar os termos para se cadastrar.</small>
-          </div>
-        </div>
-  
-        <button type="submit" class="submit-button" [disabled]="registerForm.invalid">
-          Cadastrar
-        </button>
-      </form>
-    </div>
-  </div>
-  
+      </div>
+
+      <button type="submit" class="submit-button" [disabled]="registerForm.invalid">
+        Cadastrar
+      </button>
+
+    </form> </div>
+</div>

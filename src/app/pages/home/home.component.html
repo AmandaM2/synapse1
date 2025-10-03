@@ -6,6 +6,12 @@
     <p class="project-authors"><strong>Autores:</strong> {{ project.authors }}</p>
     <p class="project-summary">{{ project.summary }}</p>
 
+    <div class="keywords-container" *ngIf="project.keywords && project.keywords.length > 0">
+  <span *ngFor="let keyword of project.keywords" class="keyword-pill">
+    {{ keyword }}
+  </span>
+</div>
+
     <div class="card-footer">
       <span class="publication-date">
         Publicado em: {{ project.publicationDate | date: 'dd/MM/yyyy' }}

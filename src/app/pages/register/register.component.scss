@@ -51,7 +51,7 @@
 .submit-button {
   width: 100%;
   padding: 0.8rem;
-  background-color: var(--cor-primaria);
+  background-color: var(--cor-terciaria);
   color: var(--cor-superficie);
   border: none;
   border-radius: 4px;
@@ -61,7 +61,7 @@
   transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: var(--cor-primaria-escura);
+    background-color: var(--cor-secundaria);
   }
 
   &:disabled {

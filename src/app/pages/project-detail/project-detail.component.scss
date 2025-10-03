@@ -4,7 +4,6 @@
   max-width: 800px;
   margin: 2rem auto;
   padding: 2.5rem;
-  /* ANTES: background-color: #fff; */
   background-color: var(--cor-superficie); /* DEPOIS: Usando a variável global */
   border: 1px solid var(--cor-borda);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
@@ -217,4 +216,22 @@ hr {
   /* ANTES: color: #555; */
   color: var(--cor-texto-secundario);
   margin-top: 1rem;
+}
+
+.keywords-container {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center; // Pequeno ajuste para alinhar o texto "Palavras-Chave"
+}
+
+.keyword-pill {
+  background-color: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  color: var(--cor-texto-secundario);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 500;
 }

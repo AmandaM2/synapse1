@@ -9,4 +9,5 @@ export interface Project {
     publicationDate: Date; // Para sabermos quando foi publicado
     likes: number;
     comments: Comment[];
+    keywords: string[];
   }

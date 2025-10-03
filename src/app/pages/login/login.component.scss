@@ -70,7 +70,7 @@
   width: 100%;
   padding: 0.8rem;
   /* ANTES: background-color: #3f51b5; */
-  background-color: var(--cor-primaria); /* DEPOIS: Usando a variável global */
+  background-color: var(--cor-terciaria); /* DEPOIS: Usando a variável global */
   /* ANTES: color: white; */
   color: var(--cor-superficie); /* DEPOIS: Usando a variável global */
   border: none;
@@ -82,7 +82,7 @@
 
   &:hover {
     /* ANTES: background-color: #303f9f; */
-    background-color: var(--cor-primaria-escura); /* DEPOIS: Usando a variável global */
+    background-color: var(--cor-secundaria); /* DEPOIS: Usando a variável global */
   }
 
   &:disabled {
