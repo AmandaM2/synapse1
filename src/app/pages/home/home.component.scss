@@ -101,7 +101,7 @@
     margin-top: 1rem;
     padding: 0.8rem 1.5rem;
     /* ANTES: background-color: #3f51b5; */
-    background-color: var(--cor-primaria); /* DEPOIS: Usando a variável global */
+    background-color: var(--cor-terciaria); /* DEPOIS: Usando a variável global */
     /* ANTES: color: white; */
     color: var(--cor-superficie); /* DEPOIS: Usando a variável global */
     text-decoration: none;
@@ -110,7 +110,7 @@
     transition: background-color 0.2s;
 
     &:hover {
-        background-color: var(--cor-primaria-escura);
+        background-color: var(--cor-secundaria);
     }
   }
 }
