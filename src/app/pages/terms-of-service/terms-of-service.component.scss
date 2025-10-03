@@ -1,24 +1,32 @@
+/* Styles for static content pages (About, FAQ, etc.) */
+
 .content-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #fff;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border-radius: 8px;
-    line-height: 1.7;
-  
-    h1 {
-      color: #3f51b5;
-      border-bottom: 2px solid #eee;
-      padding-bottom: 0.5rem;
-    }
-  
-    h2 {
-      margin-top: 2rem;
-      color: #333;
-    }
-  
-    p, li {
-      color: #555;
-    }
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2.5rem; /* A bit more space */
+  /* ANTES: background-color: #fff; */
+  background-color: var(--cor-superficie); /* DEPOIS: Using global variable */
+  border: 1px solid var(--cor-borda); /* Adding a subtle border */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  line-height: 1.7;
+ 
+  h1 {
+    /* ANTES: color: #3f51b5; */
+    color: var(--cor-primaria); /* DEPOIS: Using global variable */
+    /* ANTES: border-bottom: 2px solid #eee; */
+    border-bottom: 2px solid var(--cor-borda); /* DEPOIS: Using global variable */
+    padding-bottom: 0.5rem;
   }
+ 
+  h2 {
+    margin-top: 2rem;
+    /* ANTES: color: #333; */
+    color: var(--cor-texto-principal); /* DEPOIS: Using global variable */
+  }
+ 
+  p, li {
+    /* ANTES: color: #555; */
+    color: var(--cor-texto-secundario); /* DEPOIS: Using global variable */
+  }
+}

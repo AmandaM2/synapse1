@@ -1,9 +1,8 @@
 <div class="detail-container">
 
   <div *ngIf="project; else notFound">
-    
+
     <h1 class="project-title">{{ project.title }}</h1>
-    
     <p class="project-authors"><strong>Por:</strong> {{ project.authors }}</p>
 
     <div class="meta-info">
@@ -25,37 +24,12 @@
       <p class="description-text">{{ project.description }}</p>
     </div>
 
-    <hr>
-<div class="comments-section">
-  <h3>Comentários ({{ project.comments.length }})</h3>
-
-  <div *ngIf="isLoggedIn" class="comment-form-container">
-    <form [formGroup]="commentForm" (ngSubmit)="onCommentSubmit()">
-      <textarea formControlName="text" rows="3" placeholder="Escreva o seu comentário..."></textarea>
-      <button type="submit" [disabled]="commentForm.invalid">Enviar Comentário</button>
-    </form>
-  </div>
-  <p *ngIf="!isLoggedIn">
-    <a routerLink="/login">Faça login</a> para deixar um comentário.
-  </p>
-
-  <div class="comments-list">
-    <div *ngIf="project.comments.length === 0" class="no-comments">
-      Ainda não há comentários. Seja o primeiro!
-    </div>
-    <div *ngFor="let comment of project.comments" class="comment-card">
-      <p class="comment-text">{{ comment.text }}</p>
-      <div class="comment-footer">
-        <span class="comment-author"><strong>Por:</strong> {{ comment.authorName }}</span>
-        <span class="comment-date">{{ comment.timestamp | date: 'short' }}</span>
+    <div class="comments-section">
+      <h3>Comentários ({{ project.comments.length }})</h3>
       </div>
-    </div>
-  </div>
-</div>
 
     <div class="actions-footer">
       <a routerLink="/" class="back-link">← Voltar para o Feed</a>
-      
       <div *ngIf="isLoggedIn" class="admin-actions">
         <button class="action-button edit-button" [routerLink]="['/projeto', project.id, 'editar']">Editar</button>
         <button class="action-button delete-button" (click)="onDelete()">Excluir</button>

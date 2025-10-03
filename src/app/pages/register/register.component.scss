@@ -1,32 +1,113 @@
-// Importando estilos para reutilização (se você tiver um ficheiro de estilos comum)
-// Se não, pode copiar os estilos de login.component.scss e adicionar o .form-group-checkbox
+/* Estilos para o formulário de cadastro (reutilizando estilos de formulário) */
 
-// Exemplo completo:
-.form-container { display: flex; justify-content: center; padding: 4rem 2rem; background-color: #f4f7fc; }
-.form-card { background-color: #ffffff; padding: 2.5rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 500px; h2, p { text-align: center; } }
-.form-group { margin-bottom: 1.5rem; label { display: block; margin-bottom: 0.5rem; font-weight: 500; } input { width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; } }
-.submit-button { width: 100%; padding: 0.8rem; background-color: #3f51b5; color: white; border: none; border-radius: 4px; font-size: 1.1rem; font-weight: bold; cursor: pointer; &:hover { background-color: #303f9f; } &:disabled { background-color: #b0bec5; cursor: not-allowed; } }
-.error-message { color: #e53935; text-align: left; margin-top: 0.25rem; font-size: 0.8rem; height: 1rem; }
+.form-container {
+  display: flex;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background-color: var(--cor-fundo);
+}
 
-// Estilo específico para o grupo do checkbox da LGPD
+.form-card {
+  background-color: var(--cor-superficie);
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--cor-borda);
+  width: 100%;
+  max-width: 500px; /* Tamanho ajustado para cadastro */
+
+  h2, p {
+    text-align: center;
+  }
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: var(--cor-texto-secundario);
+  }
+
+  input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--cor-borda);
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: inherit;
+    transition: all 0.2s ease-in-out;
+
+    &:focus {
+        outline: none;
+        border-color: var(--cor-primaria);
+        box-shadow: 0 0 0 3px rgba(46, 60, 254, 0.25);
+    }
+  }
+}
+
+.submit-button {
+  width: 100%;
+  padding: 0.8rem;
+  background-color: var(--cor-primaria);
+  color: var(--cor-superficie);
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: var(--cor-primaria-escura);
+  }
+
+  &:disabled {
+    background-color: var(--cor-borda);
+    color: var(--cor-texto-secundario);
+    cursor: not-allowed;
+  }
+}
+
+.error-message {
+  color: var(--cor-perigo);
+  text-align: left;
+  margin-top: 0.25rem;
+  font-size: 0.8rem;
+  height: 1rem;
+}
+
+/* --- Estilo específico para o checkbox da LGPD --- */
 .form-group-checkbox {
   display: flex;
   align-items: flex-start;
   margin-bottom: 1.5rem;
   text-align: left;
+  padding: 1rem;
+  background-color: var(--cor-fundo);
+  border-radius: 4px;
 
   input[type="checkbox"] {
     margin-top: 3px;
     margin-right: 10px;
+    /* Estilos para customizar o checkbox (opcional) */
   }
 
   label {
     font-size: 0.9rem;
-    color: #555;
+    /* ANTES: color: #555; */
+    color: var(--cor-texto-secundario); /* DEPOIS: Usando a variável global */
+    
     a {
-      color: #3f51b5;
+      /* ANTES: color: #3f51b5; */
+      color: var(--cor-primaria); /* DEPOIS: Usando a variável global */
       text-decoration: none;
-      &:hover { text-decoration: underline; }
+      
+      &:hover {
+        text-decoration: underline;
+      }
     }
   }
 }

@@ -5,20 +5,13 @@
     <h2 class="project-title">{{ project.title }}</h2>
     <p class="project-authors"><strong>Autores:</strong> {{ project.authors }}</p>
     <p class="project-summary">{{ project.summary }}</p>
+
     <div class="card-footer">
       <span class="publication-date">
         Publicado em: {{ project.publicationDate | date: 'dd/MM/yyyy' }}
       </span>
+      <span class="likes-count-feed">❤️ {{ project.likes }}</span>
       <a [routerLink]="['/projeto', project.id]" class="read-more-link">Ler Mais</a>
-      <div class="card-footer">
-        <span class="publication-date">
-          Publicado em: {{ project.publicationDate | date: 'dd/MM/yyyy' }}
-        </span>
-
-        <span class="likes-count-feed">❤️ {{ project.likes }}</span>
-
-        <a [routerLink]="['/projeto', project.id]" class="read-more-link">Ler Mais</a>
-      </div>
     </div>
   </div>
 
@@ -27,3 +20,4 @@
     <a routerLink="/novo-projeto" class="publish-first-link">Publicar um Projeto</a>
   </div>
 </div>
+

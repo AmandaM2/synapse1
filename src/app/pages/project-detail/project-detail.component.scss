@@ -1,65 +1,112 @@
+/* Em app/components/project-detail/project-detail.component.scss */
+
 .detail-container {
-    max-width: 800px;
-    margin: 2rem auto;
-    padding: 2rem;
-    background-color: #fff;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border-radius: 8px;
-  }
-  .project-title { margin-top: 0; color: #3f51b5; }
-  .project-authors { font-style: italic; color: #555; }
-  .publication-date { color: #777; font-size: 0.9rem; }
-  hr { border: 0; border-top: 1px solid #eee; margin: 1.5rem 0; }
-  .description-text { line-height: 1.7; white-space: pre-wrap; /* Preserva quebras de linha */ }
-  .back-link { display: inline-block; margin-top: 2rem; color: #3f51b5; text-decoration: none; font-weight: bold; }
-  .not-found-card { text-align: center; }
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  /* ANTES: background-color: #fff; */
+  background-color: var(--cor-superficie); /* DEPOIS: Usando a variável global */
+  border: 1px solid var(--cor-borda);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+}
 
-  .actions-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #eee;
-  }
-  
-  .admin-actions {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .action-button {
-    padding: 0.6rem 1.2rem;
-    border: none;
-    border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.2s ease;
-  
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-  
-  .edit-button {
-    background-color: #ffc107; // Amarelo
-    color: #333;
-  }
-  
-  .delete-button {
-    background-color: #e53935; // Vermelho
-    color: white;
-  }
+.project-title {
+  margin-top: 0;
+  /* ANTES: color: #3f51b5; */
+  color: var(--cor-primaria); /* DEPOIS: Usando a variável global */
+}
 
-  // ... (estilos existentes) ...
+.project-authors {
+  font-style: italic;
+  /* ANTES: color: #555; */
+  color: var(--cor-texto-secundario); /* DEPOIS: Usando a variável global */
+}
+
+hr {
+  border: 0;
+  /* ANTES: border-top: 1px solid #eee; */
+  border-top: 1px solid var(--cor-borda); /* DEPOIS: Usando a variável global */
+  margin: 1.5rem 0;
+}
+
+.description-text {
+  line-height: 1.7;
+  white-space: pre-wrap;
+  color: var(--cor-texto-principal);
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 2rem;
+  /* ANTES: color: #3f51b5; */
+  color: var(--cor-primaria); /* DEPOIS: Usando a variável global */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.not-found-card {
+  text-align: center;
+  padding: 3rem;
+  
+  p {
+    color: var(--cor-texto-secundario);
+    font-size: 1.2rem;
+  }
+}
+
+.actions-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  /* ANTES: border-top: 1px solid #eee; */
+  border-top: 1px solid var(--cor-borda); /* DEPOIS: Usando a variável global */
+}
+
+.admin-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.action-button {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.edit-button {
+  /* ANTES: background-color: #ffc107; color: #333; */
+  /* Veja a sugestão abaixo sobre a cor de aviso! */
+  background-color: var(--cor-aviso, #ffc107);
+  color: var(--cor-texto-principal);
+}
+
+.delete-button {
+  /* ANTES: background-color: #e53935; color: white; */
+  background-color: var(--cor-perigo);
+  color: var(--cor-superficie);
+}
 
 .meta-info {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 1rem 0;
-  padding: 0.5rem 0;
-  color: #555;
+  margin: 1.5rem 0;
+  padding: 1rem;
+  background-color: var(--cor-fundo);
+  border-radius: 4px;
+  /* ANTES: color: #555; */
+  color: var(--cor-texto-secundario);
 }
 
 .likes-section {
@@ -70,33 +117,104 @@
 
 .likes-count {
   font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--cor-texto-principal);
 }
 
 .like-button {
-  background-color: #e8f0fe;
-  color: #1967d2;
-  border: 1px solid #d2e3fc;
+  /* ANTES: background-color: #e8f0fe; color: #1967d2; border: 1px solid #d2e3fc; */
+  /* Veja a sugestão abaixo! */
+  background-color: var(--cor-primaria-fundo, #e8f0fe);
+  color: var(--cor-primaria);
+  border: 1px solid var(--cor-borda);
   padding: 0.5rem 1rem;
   border-radius: 20px;
   cursor: pointer;
   font-weight: bold;
+  transition: background-color 0.2s;
 
   &:hover {
-    background-color: #d2e3fc;
+    background-color: var(--cor-borda);
   }
 }
 
-// ... (estilos existentes)
+/* --- SEÇÃO DE COMENTÁRIOS --- */
 .comments-section {
   margin-top: 2.5rem;
-  h3 { border-bottom: 1px solid #eee; padding-bottom: 0.5rem; }
+
+  h3 {
+    /* ANTES: border-bottom: 1px solid #eee; */
+    border-bottom: 1px solid var(--cor-borda);
+    padding-bottom: 0.5rem;
+    color: var(--cor-texto-principal);
+  }
 }
+
 .comment-form-container {
-  textarea { width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; font-family: inherit; margin-bottom: 0.5rem; }
-  button { background-color: #3f51b5; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 4px; font-weight: bold; cursor: pointer; &:disabled { background-color: #b0bec5; cursor: not-allowed; } }
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    /* ANTES: border: 1px solid #ccc; */
+    border: 1px solid var(--cor-borda);
+    border-radius: 4px;
+    font-family: inherit;
+    margin-bottom: 0.5rem;
+    resize: vertical;
+  }
+
+  button {
+    /* ANTES: background-color: #3f51b5; color: white; */
+    background-color: var(--cor-primaria);
+    color: var(--cor-superficie);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 4px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: var(--cor-primaria-escura);
+    }
+    
+    &:disabled {
+      /* ANTES: background-color: #b0bec5; */
+      background-color: var(--cor-borda);
+      color: var(--cor-texto-secundario);
+      cursor: not-allowed;
+    }
+  }
 }
-.comments-list { margin-top: 2rem; }
-.no-comments { color: #777; font-style: italic; }
-.comment-card { background-color: #f9f9f9; padding: 1rem; border-radius: 4px; margin-bottom: 1rem; }
-.comment-text { margin-top: 0; }
-.comment-footer { display: flex; justify-content: space-between; font-size: 0.8rem; color: #555; margin-top: 1rem; }
+
+.comments-list {
+  margin-top: 2rem;
+}
+
+.no-comments {
+  /* ANTES: color: #777; */
+  color: var(--cor-texto-secundario);
+  font-style: italic;
+}
+
+.comment-card {
+  /* ANTES: background-color: #f9f9f9; */
+  background-color: var(--cor-fundo); /* Fundo sutil para diferenciar */
+  padding: 1rem 1.5rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  border: 1px solid var(--cor-borda);
+}
+
+.comment-text {
+  margin-top: 0;
+  color: var(--cor-texto-principal);
+}
+
+.comment-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  /* ANTES: color: #555; */
+  color: var(--cor-texto-secundario);
+  margin-top: 1rem;
+}

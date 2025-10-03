@@ -1,93 +1,116 @@
-.feed-container {
-    max-width: 800px;
-    margin: 2rem auto; // Centra o container
-    padding: 0 1rem;
-  }
-  
-  .feed-title {
-    color: #333;
-    border-bottom: 2px solid #3f51b5;
-    padding-bottom: 0.5rem;
-    margin-bottom: 2rem;
-  }
-  
-  .project-card {
-    background-color: #ffffff;
-    border-radius: 8px;
-    padding: 1.5rem;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    transition: transform 0.2s ease-in-out;
-  
-    &:hover {
-      transform: translateY(-5px);
-    }
-  }
-  
-  .project-title {
-    margin-top: 0;
-    color: #3f51b5;
-  }
-  
-  .project-authors {
-    font-style: italic;
-    color: #555;
-    margin-bottom: 1rem;
-  }
-  
-  .project-summary {
-    color: #333;
-    line-height: 1.6;
-  }
-  
-  .card-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 1.5rem;
-    font-size: 0.9rem;
-    color: #777;
-  }
-  
-  .read-more-link {
-    color: #3f51b5;
-    text-decoration: none;
-    font-weight: bold;
-  
-    &:hover {
-      text-decoration: underline;
-    }
-  }
-  
-  .no-projects-message {
-    text-align: center;
-    padding: 3rem;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-  
-    p {
-      font-size: 1.2rem;
-      color: #555;
-    }
-  
-    .publish-first-link {
-      display: inline-block;
-      margin-top: 1rem;
-      padding: 0.8rem 1.5rem;
-      background-color: #3f51b5;
-      color: white;
-      text-decoration: none;
-      border-radius: 4px;
-      font-weight: bold;
-    }
-  }
+/* Em app/components/feed/feed.component.scss */
 
-  // ...
+.feed-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.feed-title {
+  /* ANTES: color: #333; */
+  color: var(--cor-texto-principal); /* DEPOIS: Usando a variável global */
+  /* ANTES: border-bottom: 2px solid #3f51b5; */
+  border-bottom: 2px solid var(--cor-primaria); /* DEPOIS: Usando a variável global */
+  padding-bottom: 0.5rem;
+  margin-bottom: 2rem;
+  font-family: var(--fonte-titulos); /* Garante a fonte correta */
+}
+
+.project-card {
+  /* ANTES: background-color: #ffffff; */
+  background-color: var(--cor-superficie); /* DEPOIS: Usando a variável global */
+  border: 1px solid var(--cor-borda); /* Adicionando uma borda sutil */
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.project-title {
+  margin-top: 0;
+  /* O h2 já pega a cor globalmente, mas podemos reforçar */
+  color: var(--cor-primaria);
+}
+
+.project-authors {
+  font-style: italic;
+  /* ANTES: color: #555; */
+  color: var(--cor-texto-secundario); /* DEPOIS: Usando a variável global */
+  margin-bottom: 1rem;
+}
+
+.project-summary {
+  /* ANTES: color: #333; */
+  color: var(--cor-texto-principal); /* DEPOIS: Usando a variável global */
+  line-height: 1.6;
+}
+
 .card-footer {
-  // ... (estilos existentes)
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem; /* Adicionado para mais respiro */
+  border-top: 1px solid var(--cor-borda); /* Divisor sutil */
+  font-size: 0.9rem;
+  /* ANTES: color: #777; */
+  color: var(--cor-texto-secundario); /* DEPOIS: Usando a variável global */
 }
 
 .likes-count-feed {
   font-weight: bold;
-  color: #555;
+  /* ANTES: color: #555; */
+  color: var(--cor-texto-secundario); /* DEPOIS: Usando a variável global */
+}
+
+.read-more-link {
+  /* ANTES: color: #3f51b5; */
+  color: var(--cor-primaria); /* DEPOIS: Usando a variável global */
+  text-decoration: none;
+  font-weight: bold;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--cor-primaria-escura);
+    text-decoration: underline;
+  }
+}
+
+.no-projects-message {
+  text-align: center;
+  padding: 3rem;
+  /* ANTES: background-color: #f9f9f9; */
+  background-color: var(--cor-superficie); /* DEPOIS: Usando a variável global */
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+
+  p {
+    font-size: 1.2rem;
+    /* ANTES: color: #555; */
+    color: var(--cor-texto-secundario); /* DEPOIS: Usando a variável global */
+  }
+
+  .publish-first-link {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.8rem 1.5rem;
+    /* ANTES: background-color: #3f51b5; */
+    background-color: var(--cor-primaria); /* DEPOIS: Usando a variável global */
+    /* ANTES: color: white; */
+    color: var(--cor-superficie); /* DEPOIS: Usando a variável global */
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: bold;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: var(--cor-primaria-escura);
+    }
+  }
 }

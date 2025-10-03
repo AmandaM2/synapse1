@@ -1,69 +1,95 @@
-// Reutilizando um estilo geral para containers de formulário
+
 .form-container {
-    display: flex;
-    justify-content: center;
-    padding: 4rem 2rem;
-    background-color: #f4f7fc;
+  display: flex;
+  justify-content: center;
+  padding: 4rem 2rem;
+  /* ANTES: background-color: #f4f7fc; */
+  background-color: var(--cor-fundo); /* DEPOIS: Usando a variável global */
+}
+ 
+.form-card {
+  /* ANTES: background-color: #ffffff; */
+  background-color: var(--cor-superficie); /* DEPOIS: Usando a variável global */
+  padding: 2.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra mais suave */
+  width: 100%;
+  max-width: 700px;
+ 
+  h2, p {
+    text-align: center;
   }
-  
-  .form-card {
-    background-color: #ffffff;
-    padding: 2.5rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+
+  /* O h2 já pega o estilo de 'var(--cor-primaria)' globalmente */
+  p {
+    color: var(--cor-texto-secundario);
+    margin-bottom: 2rem;
+  }
+}
+ 
+.form-group {
+  margin-bottom: 1.5rem;
+ 
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    /* ANTES: color: #444; */
+    color: var(--cor-texto-secundario); /* DEPOIS: Usando a variável global */
+  }
+ 
+  input, textarea {
     width: 100%;
-    max-width: 700px; // Um pouco maior para formulários de conteúdo
-  
-    h2, p {
-      text-align: center;
-    }
-  }
-  
-  .form-group {
-    margin-bottom: 1.5rem;
-  
-    label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-      color: #444;
-    }
-  
-    input, textarea {
-      width: 100%;
-      padding: 0.75rem;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 1rem;
-      box-sizing: border-box;
-      font-family: inherit; // Garante que a fonte seja a mesma do site
-  
-      &:focus {
-        outline: none;
-        border-color: #3f51b5;
-        box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
-      }
-    }
-  }
-  
-  .submit-button {
-    width: 100%;
-    padding: 0.8rem;
-    background-color: #3f51b5;
-    color: white;
-    border: none;
+    padding: 0.75rem;
+    /* ANTES: border: 1px solid #ccc; */
+    border: 1px solid var(--cor-borda); /* DEPOIS: Usando a variável global */
     border-radius: 4px;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  
-    &:hover {
-      background-color: #303f9f;
-    }
-  
-    &:disabled {
-      background-color: #b0bec5;
-      cursor: not-allowed;
+    font-size: 1rem;
+    box-sizing: border-box; 
+    font-family: inherit;
+    background-color: var(--cor-fundo); /* Fundo sutil para diferenciar do card */
+    transition: all 0.2s ease-in-out;
+ 
+    &:focus {
+      outline: none;
+      background-color: var(--cor-superficie);
+      /* ANTES: border-color: #3f51b5; */
+      border-color: var(--cor-primaria); /* DEPOIS: Usando a variável global */
+      /* ANTES: box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2); */
+      box-shadow: 0 0 0 3px rgba(46, 60, 254, 0.25); /* DEPOIS: Sombra com a cor primária */
     }
   }
+
+  textarea {
+    min-height: 150px; /* Altura mínima para áreas de texto */
+    resize: vertical;
+  }
+}
+ 
+.submit-button {
+  width: 100%;
+  padding: 0.8rem;
+  /* ANTES: background-color: #3f51b5; */
+  background-color: var(--cor-terciaria); /* DEPOIS: Usando a variável global */
+  /* ANTES: color: white; */
+  color: var(--cor-superficie); /* DEPOIS: Usando a variável global */
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-family: var(--fonte-titulos); /* Usando a fonte de títulos para destaque */
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+ 
+  &:hover {
+    /* ANTES: background-color: #303f9f; */
+    background-color: var(--cor-secundaria); /* DEPOIS: Usando a variável global */
+  }
+ 
+  &:disabled {
+    /* ANTES: background-color: #b0bec5; */
+    background-color: var(--cor-borda); /* DEPOIS: Usando a variável global */
+    color: var(--cor-texto-secundario);
+    cursor: not-allowed;
+  }
+}

@@ -1,1 +1,47 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Space+Grotesk:wght@300..700&display=swap');
+
+:root {
+    /* === A SUA PALETA DE CORES === */
+    --cor-primaria: #0e1487;      // Azul índigo (usado em links, botões, títulos)
+    --cor-primaria-escura: #1d26af; // Versão escura para hover de botões
+    --cor-secundaria: #096FFF;      // Amarelo âmbar (usado para destaque, como o botão Editar)
+    --cor-terciaria:#359CFC;
+    --cor-perigo: #f0546b;         // Vermelho (para botões de Excluir, mensagens de erro)
+  
+    --cor-fundo: #F5F5F5;         // Cor de fundo geral da aplicação (cinza muito claro)
+    --cor-superficie: ##E3DADA;   // Cor dos cartões e headers (branco)
+  
+    --cor-texto-principal: #212121;  // Texto principal (preto suave)
+    --cor-texto-secundario: #343a40; 
+    --cor-borda: #e0e0e0;    
+    
+    --cor-aviso: #0fb7fa;         /* Amarelo para botões de edição ou alertas */
+    --cor-primaria-fundo: #e8f0fe; /* Fundo azul claro para destaques sutis */
+  
+
+    --fonte-titulos: 'Sansation', sans-serif;
+    --fonte-corpo: 'Space Grotesk', sans-serif;
+  }
+
+  // Em src/styles.scss
+
+body {
+    margin: 0;
+    font-family: var(--fonte-corpo);
+    background-color: var(--cor-fundo);
+    color: var(--cor-texto-principal);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--fonte-titulos);
+    color: var(--cor-primaria);
+  }
+  
+  a {
+    color: var(--cor-primaria);
+    text-decoration: none;
+  
+    &:hover {
+      text-decoration: underline;
+    }
+  }

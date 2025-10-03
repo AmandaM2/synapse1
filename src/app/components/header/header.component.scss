@@ -1,36 +1,52 @@
+/* Em app/components/header/header.component.scss */
+
 .main-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 2rem;
-    background-color: #ffffff;
-    border-bottom: 1px solid #e0e0e0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: var(--cor-superficie); /* Alterado para branco para mais contraste */
+  border-bottom: 1px solid var(--cor-borda);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+ 
+.logo a {
+  font-family: var(--fonte-titulos); /* Usando a fonte de títulos */
+  font-size: 1.5rem;
+  font-weight: 700; /* Um pouco mais forte */
+  text-decoration: none;
+  color: var(--cor-primaria);
+}
+ 
+.main-nav ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1.5rem;
+}
+ 
+.main-nav a {
+  font-family: var(--fonte-corpo); /* Usando a fonte de corpo */
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem;
+  transition: color 0.2s ease-in-out;
+
+  /* ANTES: color: #333; */
+  color: var(--cor-texto-secundario); /* DEPOIS: Usando a variável para consistência */
+ 
+  &:hover {
+    /* ANTES: color: var(--cor-primaria-escura); */
+    color: var(--cor-primaria); /* DEPOIS: Fica com a cor principal para um destaque mais forte */
   }
-  
-  .logo a {
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-decoration: none;
-    color: #3f51b5; // Um azul índigo, remete à ciência
-  }
-  
-  .main-nav ul {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    gap: 1.5rem; // Espaçamento entre os itens
-  }
-  
-  .main-nav a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    padding: 0.5rem;
-    transition: color 0.3s ease;
-  
-    &:hover {
-      color: #3f51b5;
-    }
-  }
+}
+
+/* BÔNUS: Estilo para o link da página ativa. 
+  No seu HTML, você usaria assim:
+  <a routerLink="/projetos" routerLinkActive="active-link">Projetos</a>
+*/
+.main-nav a.active-link {
+  color: var(--cor-primaria);
+  font-weight: 700; /* Mais destacado */
+}
