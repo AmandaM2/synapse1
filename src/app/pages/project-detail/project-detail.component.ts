@@ -16,6 +16,7 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angula
 export class ProjectDetailComponent implements OnInit {
   project: Project | undefined;
   commentForm!: FormGroup;
+  isSaved: boolean = false; // NOVA PROPRIEDADE
 
   constructor(
     private route: ActivatedRoute,
@@ -29,21 +30,20 @@ export class ProjectDetailComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Inicializa o formulário de comentário primeiro
     this.commentForm = new FormGroup({
       text: new FormControl(null, Validators.required)
     });
     
-    // Vai buscar os dados do projeto
     const projectId = this.route.snapshot.paramMap.get('id');
     if (projectId) {
       this.project = this.projectService.getProjectById(projectId);
 
-      // ----> A CORREÇÃO PRINCIPAL ESTÁ AQUI <----
-      // Linha de segurança: Se o projeto foi encontrado mas não tem a propriedade 'comments',
-      // inicializamo-la como um array vazio para evitar erros no template.
-      if (this.project && !this.project.comments) {
-        this.project.comments = [];
+      if (this.project) {
+        // Inicializa o estado 'isSaved'
+        this.isSaved = this.projectService.isProjectSaved(this.project.id);
+        if (!this.project.comments) {
+          this.project.comments = [];
+        }
       }
     }
   }
@@ -61,25 +61,25 @@ export class ProjectDetailComponent implements OnInit {
   onLike(): void {
     if (this.project) {
       this.projectService.likeProject(this.project.id);
-      this.project.likes++;
     }
   }
-
   onCommentSubmit(): void {
     if (this.commentForm.invalid || !this.project) {
       return;
     }
+    
     const commentText = this.commentForm.value.text;
+  
+   
     this.projectService.addComment(this.project.id, commentText);
-
-    // Como já garantimos que this.project.comments existe, esta linha é segura.
-    this.project.comments.push({
-      id: new Date().getTime().toString(),
-      authorName: 'Utilizador Anónimo', // Numa app real, viria do AuthService
-      text: commentText,
-      timestamp: new Date()
-    });
-
+  
     this.commentForm.reset();
+  }
+
+  onToggleSave(): void {
+    if (this.project) {
+      this.projectService.toggleSaveProject(this.project.id);
+      this.isSaved = !this.isSaved; // Inverte o estado na UI
+    }
   }
 }

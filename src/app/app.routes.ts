@@ -9,6 +9,7 @@ import { TermsOfServiceComponent } from './pages/terms-of-service/terms-of-servi
 import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.component';
 import { ProjectEditComponent } from './pages/project-edit/project-edit.component';
 import { UsersComponent } from './pages/users/users.component';
+import { SavedProjectsComponent } from './pages/saved-projects/saved-projects.component';
 
 
 export const routes: Routes = [
@@ -16,6 +17,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'cadastro', component: RegisterComponent},
     { path: 'usuarios', component: UsersComponent},
+    { path: 'salvos', component: SavedProjectsComponent, canActivate:[authGuard]},
     { path: 'termos', component: TermsOfServiceComponent},
     { path: 'privacidade', component: PrivacyPolicyComponent},
     { path: 'novo-projeto', component: CreateProjectComponent, canActivate:[authGuard]},

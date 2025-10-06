@@ -1,8 +1,13 @@
 <div class="feed-container">
   <h1 class="feed-title">Projetos Recentes</h1>
 
-  <div *ngIf="(projects$ | async) as projects; else noProjects">
-    
+  <div *ngIf="(projects$ | async) as projects; else loading">
+
+    <div *ngIf="projects.length === 0" class="no-projects-message">
+      <p>Nenhum projeto encontrado. Seja o primeiro a partilhar ou ajuste a sua pesquisa!</p>
+      <a routerLink="/novo-projeto" class="publish-first-link">Publicar um Projeto</a>
+    </div>
+
     <div *ngFor="let project of projects" class="project-card">
       <h2 class="project-title">{{ project.title }}</h2>
       <p class="project-authors"><strong>Autores:</strong> {{ project.authors }}</p>
@@ -14,23 +19,31 @@
         </span>
       </div>
 
+      <div class="card-actions" *ngIf="isLoggedIn">
+        <button (click)="onLike(project.id)" class="action-button like-button">
+          ❤️ Curtir
+        </button>
+        <button (click)="onToggleSave(project.id)" class="action-button save-button">
+          <ng-container *ngIf="!isProjectSaved(project.id)">⭐ Salvar</ng-container>
+          <ng-container *ngIf="isProjectSaved(project.id)">⭐ Remover</ng-container>
+        </button>
+      </div>
+
       <div class="card-footer">
         <span class="publication-date">
           Publicado em: {{ project.publicationDate | date: 'dd/MM/yyyy' }}
         </span>
-        <span class="likes-count-feed">❤️ {{ project.likes }}</span>
+        <div class="card-metrics">
+          <span class="likes-count-feed">❤️ {{ project.likes }}</span>
+          <span class="comments-count-feed">💬 {{ project.comments?.length || 0 }}</span>
+        </div>
         <a [routerLink]="['/projeto', project.id]" class="read-more-link">Ler Mais</a>
       </div>
     </div>
 
-    <div *ngIf="projects.length === 0" class="no-projects-message">
-       <p>Nenhum projeto encontrado. Seja o primeiro a partilhar ou ajuste a sua pesquisa!</p>
-       <a routerLink="/novo-projeto" class="publish-first-link">Publicar um Projeto</a>
-    </div>
-
   </div>
 
-  <ng-template #noProjects>
+  <ng-template #loading>
     <div class="no-projects-message">
       <p>A carregar projetos...</p>
     </div>

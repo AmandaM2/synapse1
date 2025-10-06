@@ -7,18 +7,24 @@ import { Comment } from '../models/comment.model';
   providedIn: 'root'
 })
 export class ProjectService {
-  private readonly STORAGE_KEY = 'synapse-projects';
+  private readonly PROJECTS_STORAGE_KEY = 'synapse-projects';
+  private readonly SAVED_PROJECTS_KEY = 'synapse-saved-projects'; // NOVA CHAVE
 
   private _allProjects: Project[] = [];
   private _projects$ = new BehaviorSubject<Project[]>([]);
   public projects$: Observable<Project[]> = this._projects$.asObservable();
 
+  // NOVO: Um Set para guardar os IDs dos projetos salvos.
+  // Usamos um Set porque ele automaticamente evita IDs duplicados.
+  private savedProjectIds = new Set<string>();
+
   constructor() {
     this.loadProjectsFromLocalStorage();
+    this.loadSavedProjectIds(); // NOVO: Carregar os IDs salvos
   }
 
   private loadProjectsFromLocalStorage(): void {
-    const projectsJson = localStorage.getItem(this.STORAGE_KEY);
+    const projectsJson = localStorage.getItem(this.PROJECTS_STORAGE_KEY);
     if (projectsJson) {
       this._allProjects = JSON.parse(projectsJson).map((p: any) => ({
         ...p,
@@ -44,7 +50,7 @@ export class ProjectService {
   }
 
   private saveAndBroadcast(): void {
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this._allProjects));
+    localStorage.setItem(this.PROJECTS_STORAGE_KEY, JSON.stringify(this._allProjects));
     this._projects$.next(this._allProjects);
   }
 
@@ -61,6 +67,37 @@ export class ProjectService {
     );
     this._projects$.next(filtered);
   }
+
+  private loadSavedProjectIds(): void {
+    const savedIdsJson = localStorage.getItem(this.SAVED_PROJECTS_KEY);
+    if (savedIdsJson) {
+      const ids: string[] = JSON.parse(savedIdsJson);
+      this.savedProjectIds = new Set(ids);
+    }
+  }
+
+  private saveIdsToLocalStorage(): void {
+    localStorage.setItem(this.SAVED_PROJECTS_KEY, JSON.stringify(Array.from(this.savedProjectIds)));
+  }
+
+  public toggleSaveProject(projectId: string): void {
+    if (this.savedProjectIds.has(projectId)) {
+      this.savedProjectIds.delete(projectId); // Se já existe, remove
+    } else {
+      this.savedProjectIds.add(projectId); // Se não existe, adiciona
+    }
+    this.saveIdsToLocalStorage();
+  }
+
+  public getSavedProjects(): Project[] {
+
+    return this._allProjects.filter(project => this.savedProjectIds.has(project.id));
+  }
+
+  public isProjectSaved(projectId: string): boolean {
+    return this.savedProjectIds.has(projectId);
+  }
+
 
   addProject(projectData: any): void {
     const newProject: Project = {
@@ -88,7 +125,7 @@ export class ProjectService {
     const project = this._allProjects.find(p => p.id === id);
     if (project) {
       project.likes++;
-      this.saveAndBroadcast();
+      this.saveAndBroadcast(); 
     }
   }
 

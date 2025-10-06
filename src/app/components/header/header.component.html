@@ -15,6 +15,7 @@
   <nav class="main-nav">
     <ul>
       <li><a routerLink="/usuarios">Comunidade</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/salvos">Salvos</a></li> 
       <li *ngIf="isLoggedIn">
         <a routerLink="/novo-projeto">Publicar Projeto</a>
       </li>

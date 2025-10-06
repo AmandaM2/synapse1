@@ -1,0 +1,150 @@
+
+.feed-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  .feed-title {
+  
+    color: var(--cor-texto-principal); 
+    border-bottom: 2px solid var(--cor-primaria); 
+    padding-bottom: 0.5rem;
+    margin-bottom: 2rem;
+    font-family: var(--fonte-titulos); 
+  }
+  
+  .project-card {
+    
+    background-color: var(--cor-superficie); 
+    border: 1px solid var(--cor-borda); 
+    border-radius: 8px;
+    padding: 1.5rem 2rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+  
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  .project-title {
+    margin-top: 0;
+    
+    color: var(--cor-primaria);
+  }
+  
+  .project-authors {
+    font-style: italic;
+   
+    color: var(--cor-texto-secundario); 
+    margin-bottom: 1rem;
+  }
+  
+  .project-summary {
+    
+    color: var(--cor-texto-principal); 
+    line-height: 1.6;
+  }
+  
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding-top: 1rem; 
+    border-top: 1px solid var(--cor-borda); 
+    font-size: 0.9rem;
+   
+    color: var(--cor-texto-secundario); 
+  }
+  
+  .likes-count-feed {
+    font-weight: bold;
+    
+    color: var(--cor-texto-secundario); 
+  }
+  
+  .read-more-link {
+    
+    color: var(--cor-primaria); 
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.2s;
+  
+    &:hover {
+      color: var(--cor-primaria-escura);
+      text-decoration: underline;
+    }
+  }
+  
+  .no-projects-message {
+    text-align: center;
+    padding: 3rem;
+    
+    background-color: var(--cor-superficie); 
+    border: 1px solid var(--cor-borda);
+    border-radius: 8px;
+  
+    p {
+      font-size: 1.2rem;
+      
+      color: var(--cor-texto-secundario); 
+    }
+  
+    .publish-first-link {
+      display: inline-block;
+      margin-top: 1rem;
+      padding: 0.8rem 1.5rem;
+      
+      background-color: var(--cor-terciaria); 
+      
+      color: var(--cor-superficie); 
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      transition: background-color 0.2s;
+  
+      &:hover {
+          background-color: var(--cor-secundaria);
+      }
+    }
+  }
+  
+  .keywords-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  
+  .keyword-pill {
+    background-color: var(--cor-fundo);
+    border: 1px solid var(--cor-borda);
+    color: var(--cor-texto-secundario);
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+  }
+  
+  .search-container {
+    margin-bottom: 2rem;
+  }
+  
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border-radius: 25px; // Bordas arredondadas
+    border: 1px solid var(--cor-borda);
+    box-sizing: border-box;
+  
+    &:focus {
+      outline: none;
+      border-color: var(--cor-primaria);
+      box-shadow: 0 0 0 2px var(--cor-primaria); // Usando a sua cor primária
+    }
+  }

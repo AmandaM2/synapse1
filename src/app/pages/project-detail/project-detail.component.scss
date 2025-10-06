@@ -1,10 +1,9 @@
-/* Em app/components/project-detail/project-detail.component.scss */
 
 .detail-container {
   max-width: 800px;
   margin: 2rem auto;
   padding: 2.5rem;
-  background-color: var(--cor-superficie); /* DEPOIS: Usando a variável global */
+  background-color: var(--cor-superficie); 
   border: 1px solid var(--cor-borda);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
   border-radius: 8px;
@@ -13,19 +12,19 @@
 .project-title {
   margin-top: 0;
   /* ANTES: color: #3f51b5; */
-  color: var(--cor-primaria); /* DEPOIS: Usando a variável global */
+  color: var(--cor-primaria); 
 }
 
 .project-authors {
   font-style: italic;
   /* ANTES: color: #555; */
-  color: var(--cor-texto-secundario); /* DEPOIS: Usando a variável global */
+  color: var(--cor-texto-secundario); 
 }
 
 hr {
   border: 0;
   /* ANTES: border-top: 1px solid #eee; */
-  border-top: 1px solid var(--cor-borda); /* DEPOIS: Usando a variável global */
+  border-top: 1px solid var(--cor-borda); 
   margin: 1.5rem 0;
 }
 
@@ -39,7 +38,7 @@ hr {
   display: inline-block;
   margin-top: 2rem;
   /* ANTES: color: #3f51b5; */
-  color: var(--cor-primaria); /* DEPOIS: Usando a variável global */
+  color: var(--cor-primaria); 
   text-decoration: none;
   font-weight: bold;
 }
@@ -61,7 +60,7 @@ hr {
   margin-top: 2rem;
   padding-top: 1.5rem;
   /* ANTES: border-top: 1px solid #eee; */
-  border-top: 1px solid var(--cor-borda); /* DEPOIS: Usando a variável global */
+  border-top: 1px solid var(--cor-borda); 
 }
 
 .admin-actions {
@@ -84,14 +83,12 @@ hr {
 }
 
 .edit-button {
-  /* ANTES: background-color: #ffc107; color: #333; */
-  /* Veja a sugestão abaixo sobre a cor de aviso! */
   background-color: var(--cor-aviso, #ffc107);
   color: var(--cor-texto-principal);
 }
 
 .delete-button {
-  /* ANTES: background-color: #e53935; color: white; */
+
   background-color: var(--cor-perigo);
   color: var(--cor-superficie);
 }
@@ -104,7 +101,7 @@ hr {
   padding: 1rem;
   background-color: var(--cor-fundo);
   border-radius: 4px;
-  /* ANTES: color: #555; */
+ 
   color: var(--cor-texto-secundario);
 }
 
@@ -121,8 +118,7 @@ hr {
 }
 
 .like-button {
-  /* ANTES: background-color: #e8f0fe; color: #1967d2; border: 1px solid #d2e3fc; */
-  /* Veja a sugestão abaixo! */
+
   background-color: var(--cor-primaria-fundo, #e8f0fe);
   color: var(--cor-primaria);
   border: 1px solid var(--cor-borda);
@@ -137,12 +133,12 @@ hr {
   }
 }
 
-/* --- SEÇÃO DE COMENTÁRIOS --- */
+
 .comments-section {
   margin-top: 2.5rem;
 
   h3 {
-    /* ANTES: border-bottom: 1px solid #eee; */
+ 
     border-bottom: 1px solid var(--cor-borda);
     padding-bottom: 0.5rem;
     color: var(--cor-texto-principal);
@@ -153,7 +149,7 @@ hr {
   textarea {
     width: 100%;
     padding: 0.75rem;
-    /* ANTES: border: 1px solid #ccc; */
+
     border: 1px solid var(--cor-borda);
     border-radius: 4px;
     font-family: inherit;
@@ -162,8 +158,8 @@ hr {
   }
 
   button {
-    /* ANTES: background-color: #3f51b5; color: white; */
-    background-color: var(--cor-primaria);
+
+    background-color: var(--cor-terciaria);
     color: var(--cor-superficie);
     border: none;
     padding: 0.6rem 1.2rem;
@@ -173,11 +169,11 @@ hr {
     transition: background-color 0.2s;
 
     &:hover {
-        background-color: var(--cor-primaria-escura);
+        background-color: var(--cor-secundaria);
     }
     
     &:disabled {
-      /* ANTES: background-color: #b0bec5; */
+
       background-color: var(--cor-borda);
       color: var(--cor-texto-secundario);
       cursor: not-allowed;
@@ -190,14 +186,14 @@ hr {
 }
 
 .no-comments {
-  /* ANTES: color: #777; */
+
   color: var(--cor-texto-secundario);
   font-style: italic;
 }
 
 .comment-card {
-  /* ANTES: background-color: #f9f9f9; */
-  background-color: var(--cor-fundo); /* Fundo sutil para diferenciar */
+
+  background-color: var(--cor-fundo); 
   padding: 1rem 1.5rem;
   border-radius: 4px;
   margin-bottom: 1rem;
@@ -213,7 +209,7 @@ hr {
   display: flex;
   justify-content: space-between;
   font-size: 0.8rem;
-  /* ANTES: color: #555; */
+
   color: var(--cor-texto-secundario);
   margin-top: 1rem;
 }
@@ -223,7 +219,7 @@ hr {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  align-items: center; // Pequeno ajuste para alinhar o texto "Palavras-Chave"
+  align-items: center; 
 }
 
 .keyword-pill {
@@ -234,4 +230,9 @@ hr {
   border-radius: 20px;
   font-size: 0.8rem;
   font-weight: 500;
+}
+
+.save-button {
+  background-color: var(--cor-terciaria); // Usando a sua cor secundária
+  color: var(--cor-texto-principal);
 }

@@ -6,15 +6,13 @@
       <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
           <label for="email">Email</label>
-          <input type="email" id="email" placeholder="seu@email.com" formControlName="email">
-
+          <input type="email" id="email" formControlName="email">
+        
           <div *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched" class="error-message">
             <small *ngIf="loginForm.get('email')?.errors?.['required']">Campo obrigatório.</small>
-            <small *ngIf="loginForm.get('email')?.errors?.['email']">Por favor, insira um email válido.</small>
+            <small *ngIf="loginForm.get('email')?.errors?.['email']">Por favor, insira um formato de email válido (ex: nome@dominio.com).</small>
           </div>
-        </div>
-  
-        <div class="form-group">
+        </div> <div class="form-group">
           <label for="password">Senha</label>
           <input type="password" id="password" placeholder="Sua senha" formControlName="password">
         </div>

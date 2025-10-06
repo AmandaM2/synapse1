@@ -1,0 +1,33 @@
+<div class="feed-container">
+    <h1 class="feed-title">Meus Projetos Salvos</h1>
+  
+    <div *ngIf="savedProjects.length > 0; else noSavedProjects">
+  
+      <div *ngFor="let project of savedProjects" class="project-card">
+        <h2 class="project-title">{{ project.title }}</h2>
+        <p class="project-authors"><strong>Autores:</strong> {{ project.authors }}</p>
+        <p class="project-summary">{{ project.summary }}</p>
+  
+        <div class="keywords-container" *ngIf="project.keywords && project.keywords.length > 0">
+          <span *ngFor="let keyword of project.keywords" class="keyword-pill">
+            {{ keyword }}
+          </span>
+        </div>
+  
+        <div class="card-footer">
+          <span class="publication-date">
+            Publicado em: {{ project.publicationDate | date: 'dd/MM/yyyy' }}
+          </span>
+          <span class="likes-count-feed">❤️ {{ project.likes }}</span>
+          <a [routerLink]="['/projeto', project.id]" class="read-more-link">Ler Mais</a>
+        </div>
+      </div>
+    </div>
+  
+    <ng-template #noSavedProjects>
+      <div class="no-projects-message">
+        <p>Você ainda não salvou nenhum projeto.</p>
+        <a routerLink="/" class="publish-first-link">Explorar Projetos</a>
+      </div>
+    </ng-template>
+  </div>
