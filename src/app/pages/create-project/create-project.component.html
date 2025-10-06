@@ -15,10 +15,15 @@
         <input type="text" id="authors" formControlName="authors" placeholder="Ex: Santos, J.; Silva, M.">
       </div>
 
-      <div class="form-group">
-        <label for="summary">Resumo (Máx. 300 caracteres)</label>
-        <textarea id="summary" rows="4" formControlName="summary"></textarea>
-      </div>
+<div class="form-group">
+  <label for="summary">Resumo (Máx. 500 caracteres)</label>
+  <textarea id="summary" rows="4" formControlName="summary"></textarea>
+
+  <div *ngIf="projectForm.get('summary')?.invalid && projectForm.get('summary')?.touched" class="error-message">
+    <small *ngIf="projectForm.get('summary')?.errors?.['required']">O resumo é obrigatório.</small>
+    <small *ngIf="projectForm.get('summary')?.errors?.['maxlength']">O resumo excedeu o limite de 500 caracteres.</small>
+  </div>
+</div>
 
       <div class="form-group">
         <label for="description">Descrição Completa</label>

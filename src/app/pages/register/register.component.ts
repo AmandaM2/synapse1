@@ -34,14 +34,18 @@ export class RegisterComponent implements OnInit {
     this.registerForm = new FormGroup({
   name: new FormControl(null, Validators.required),
   email: new FormControl(null, [Validators.required, Validators.email]),
-  password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
-  confirmPassword: new FormControl(null, [Validators.required]),
+ password: new FormControl(null, [
+  Validators.required,
+  Validators.minLength(8),
+  Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$')
+]),
+confirmPassword: new FormControl(null, [Validators.required]),
 
-  // ===== NOVOS CAMPOS ADICIONADOS AQUI =====
+
   age: new FormControl(null, [Validators.required, Validators.min(16)]), // Idade obrigatória e mínima de 16
   profession: new FormControl(null, Validators.required),
   interests: new FormControl(null, Validators.required),
-  // ===========================================
+
 
   lgpdConsent: new FormControl(false, Validators.requiredTrue) 
 }, { 

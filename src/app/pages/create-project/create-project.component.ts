@@ -23,9 +23,8 @@ export class CreateProjectComponent implements OnInit {
     this.projectForm = new FormGroup({
       title: new FormControl(null, Validators.required),
       authors: new FormControl(null, Validators.required),
-      summary: new FormControl(null, [Validators.required, Validators.maxLength(300)]),
+      summary: new FormControl(null, [Validators.required, Validators.maxLength(500)]),
       description: new FormControl(null, Validators.required),
-      // NOVOS CAMPOS
       keywords: new FormControl(null, Validators.required),
       lgpdConsent: new FormControl(false, Validators.requiredTrue)
     });
