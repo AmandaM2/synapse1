@@ -1,0 +1,53 @@
+.users-container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  .page-title, .page-subtitle {
+    text-align: center;
+  }
+  .page-subtitle {
+    color: var(--cor-texto-secundario);
+    margin-bottom: 3rem;
+  }
+  
+  .users-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+  }
+  
+  .user-card {
+    background-color: var(--cor-superficie);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+    border-left: 5px solid var(--cor-primaria);
+  }
+  
+  .user-name {
+    margin-top: 0;
+    color: var(--cor-texto-principal);
+  }
+  
+  .user-profession {
+    font-weight: 500;
+    color: var(--cor-primaria);
+    background-color: #e8f0fe; // Um fundo azul claro
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
+    margin-bottom: 1rem;
+  }
+  
+  .user-interests {
+    font-size: 0.9rem;
+    color: var(--cor-texto-secundario);
+  }
+  .no-users-message{
+    text-align: center;
+    padding: 3rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  }

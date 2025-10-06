@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Project } from '../models/project.model';
 import { Comment } from '../models/comment.model';
 
@@ -6,28 +7,26 @@ import { Comment } from '../models/comment.model';
   providedIn: 'root'
 })
 export class ProjectService {
-  // Chave para guardar os nossos dados no localStorage.
   private readonly STORAGE_KEY = 'synapse-projects';
 
-  private projects: Project[] = [];
+  private _allProjects: Project[] = [];
+  private _projects$ = new BehaviorSubject<Project[]>([]);
+  public projects$: Observable<Project[]> = this._projects$.asObservable();
 
   constructor() {
-    // NOVO: Quando o serviço é criado, tentamos carregar os projetos do localStorage.
     this.loadProjectsFromLocalStorage();
   }
 
   private loadProjectsFromLocalStorage(): void {
     const projectsJson = localStorage.getItem(this.STORAGE_KEY);
     if (projectsJson) {
-      this.projects = JSON.parse(projectsJson);
-      // IMPORTANTE: O JSON não guarda os tipos, então convertemos as strings de data de volta para objetos Date.
-      this.projects.forEach(p => {
-        p.publicationDate = new Date(p.publicationDate);
-        p.comments.forEach(c => c.timestamp = new Date(c.timestamp));
-      });
+      this._allProjects = JSON.parse(projectsJson).map((p: any) => ({
+        ...p,
+        publicationDate: new Date(p.publicationDate),
+        comments: p.comments ? p.comments.map((c: any) => ({ ...c, timestamp: new Date(c.timestamp) })) : []
+      }));
     } else {
-      // Se não houver nada guardado, usamos o nosso projeto de exemplo inicial.
-      this.projects = [
+      this._allProjects = [
         {
           id: '1',
           title: 'Explorando Buracos Negros com Simulações Computacionais',
@@ -37,71 +36,75 @@ export class ProjectService {
           publicationDate: new Date(),
           likes: 15,
           comments: [],
-          keywords: ['astrofísica', 'simulação', 'relatividade'] 
+          keywords: ['astrofísica', 'simulação']
         }
       ];
     }
+    this._projects$.next(this._allProjects);
   }
 
-  // NOVO: Um método privado para guardar o estado atual no localStorage.
-  private saveProjectsToLocalStorage(): void {
-    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.projects));
+  private saveAndBroadcast(): void {
+    localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this._allProjects));
+    this._projects$.next(this._allProjects);
   }
 
-  // MÉTODOS PÚBLICOS (com uma pequena adição)
-
-  getProjects(): Project[] {
-    return [...this.projects];
-  }
-
-  getProjectById(id: string): Project | undefined {
-    return this.projects.find(p => p.id === id);
-  }
-
-addProject(projectData: { title: string, authors: string, summary: string, description: string, keywords: string[] }): void {
-  const newProject: Project = {
-    id: new Date().getTime().toString(),
-    ...projectData, // Copia title, authors, summary, description, keywords
-    publicationDate: new Date(),
-    likes: 0,
-    comments: []
-  };
-  this.projects.unshift(newProject);
-  this.saveProjectsToLocalStorage();
-}
-
-  updateProject(id: string, updatedData: { title: string, authors: string, summary: string, description: string }): void {
-    const projectIndex = this.projects.findIndex(p => p.id === id);
-    if (projectIndex > -1) {
-      this.projects[projectIndex] = { ...this.projects[projectIndex], ...updatedData };
-      this.saveProjectsToLocalStorage(); // GUARDA AS ALTERAÇÕES
+  public filterProjects(searchTerm: string): void {
+    if (!searchTerm) {
+      this._projects$.next(this._allProjects);
+      return;
     }
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    const filtered = this._allProjects.filter(project =>
+      project.title.toLowerCase().includes(lowerCaseSearchTerm) ||
+      project.summary.toLowerCase().includes(lowerCaseSearchTerm) ||
+      project.keywords.some(k => k.toLowerCase().includes(lowerCaseSearchTerm))
+    );
+    this._projects$.next(filtered);
+  }
+
+  addProject(projectData: any): void {
+    const newProject: Project = {
+      id: new Date().getTime().toString(), ...projectData,
+      publicationDate: new Date(), likes: 0, comments: []
+    };
+    this._allProjects.unshift(newProject);
+    this.saveAndBroadcast();
   }
 
   deleteProject(id: string): void {
-    this.projects = this.projects.filter(project => project.id !== id);
-    this.saveProjectsToLocalStorage(); // GUARDA AS ALTERAÇÕES
+    this._allProjects = this._allProjects.filter(p => p.id !== id);
+    this.saveAndBroadcast();
+  }
+
+  updateProject(id: string, updatedData: any): void {
+    const index = this._allProjects.findIndex(p => p.id === id);
+    if (index > -1) {
+      this._allProjects[index] = { ...this._allProjects[index], ...updatedData };
+      this.saveAndBroadcast();
+    }
   }
 
   likeProject(id: string): void {
-    const project = this.projects.find(p => p.id === id);
+    const project = this._allProjects.find(p => p.id === id);
     if (project) {
       project.likes++;
-      this.saveProjectsToLocalStorage(); // GUARDA AS ALTERAÇÕES
+      this.saveAndBroadcast();
     }
   }
 
   addComment(projectId: string, commentText: string): void {
-    const project = this.projects.find(p => p.id === projectId);
+    const project = this._allProjects.find(p => p.id === projectId);
     if (project) {
       const newComment: Comment = {
         id: new Date().getTime().toString(),
-        authorName: 'Utilizador Anónimo',
-        text: commentText,
-        timestamp: new Date()
+        authorName: 'Utilizador Anónimo', text: commentText, timestamp: new Date()
       };
       project.comments.push(newComment);
-      this.saveProjectsToLocalStorage(); // GUARDA AS ALTERAÇÕES
+      this.saveAndBroadcast();
     }
+  }
+  
+  getProjectById(id: string): Project | undefined {
+    return this._allProjects.find(p => p.id === id);
   }
 }

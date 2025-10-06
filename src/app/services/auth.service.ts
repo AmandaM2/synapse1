@@ -48,6 +48,11 @@ export class AuthService {
     console.log('Novo utilizador registado e guardado:', this.users);
   }
 
+  public getUsers(): User[] {
+    // Retorna uma cópia para proteger a lista original
+    return [...this.users];
+  }
+
   isAuthenticated(): boolean {
     return !!localStorage.getItem('authToken');
   }

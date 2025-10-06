@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProjectService } from '../../services/project.service'; // 1. Importe o serviço
-import { Project } from '../../models/project.model';      
 import { RouterLink } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ProjectService } from '../../services/project.service';
+import { Project } from '../../models/project.model';
 
 @Component({
   selector: 'app-home',
@@ -11,15 +12,10 @@ import { RouterLink } from '@angular/router';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
-  // 3. Crie uma propriedade para guardar a lista de projetos
-  projects: Project[] = [];
+export class HomeComponent {
+  public projects$: Observable<Project[]>;
 
-  // 4. Injete o serviço no construtor
-  constructor(private projectService: ProjectService) {}
-
-  // 5. No ngOnInit, vá buscar os projetos ao serviço
-  ngOnInit(): void {
-    this.projects = this.projectService.getProjects();
+  constructor(private projectService: ProjectService) {
+    this.projects$ = this.projectService.projects$;
   }
 }

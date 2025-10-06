@@ -1,20 +1,29 @@
 <header class="main-header">
-    <div class="logo">
-      <a routerLink ="/">Synapse</a>
-    </div>
-    <nav class="main-nav">
-      <ul>
-        <li *ngIf="isLoggedIn">
-          <a routerLink ="/novo-projeto">Publicar Projeto</a>
-        </li>
+  <div class="logo">
+    <a routerLink="/">Synapse</a>
+  </div>
 
-        <li *ngIf="!isLoggedIn">
-          <a routerLink="/login">Login</a>
-        </li>
+  <div class="search-container">
+    <input 
+      type="text" 
+      placeholder="Pesquisar projetos..."
+      class="search-input"
+      [(ngModel)]="searchTerm"
+      (input)="onSearch()">
+  </div>
 
-        <li *ngIf="isLoggedIn">
-          <a href="#"(click)="onLogout()">Logout</a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+  <nav class="main-nav">
+    <ul>
+      <li><a routerLink="/usuarios">Comunidade</a></li>
+      <li *ngIf="isLoggedIn">
+        <a routerLink="/novo-projeto">Publicar Projeto</a>
+      </li>
+      <li *ngIf="!isLoggedIn">
+        <a routerLink="/login">Login</a>
+      </li>
+      <li *ngIf="isLoggedIn">
+        <a href="#" (click)="onLogout()">Logout</a>
+      </li>
+    </ul>
+  </nav>
+</header>
