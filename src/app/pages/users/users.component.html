@@ -3,14 +3,15 @@
     <p class="page-subtitle">Cientistas e entusiastas que fazem parte da nossa rede.</p>
   
     <div class="users-grid">
-      <div *ngFor="let user of users" class="user-card">
-        <h2 class="user-name">{{ user.name }}</h2>
-        <p class="user-profession">{{ user.profession }}</p>
-        <div class="user-interests">
-          <strong>Interesse principal:</strong> {{ user.interests }}
+      <a *ngFor="let user of users" [routerLink]="['/perfil', user.id]" class="user-card-link">
+        <div class="user-card">
+          <h2 class="user-name">{{ user.name }}</h2>
+          <p class="user-profession">{{ user.profession }}</p>
+          <div class="user-interests">
+            <strong>Interesse principal:</strong> {{ user.interests }}
+          </div>
         </div>
-      </div>
-    </div>
+      </a>
   
     <div *ngIf="users.length === 0" class="no-users-message">
       <p>Ainda não há utilizadores cadastrados na plataforma.</p>

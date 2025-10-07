@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../models/user.model'; // Importe o nosso novo modelo
+import { User } from '../models/user.model'; 
 
 @Injectable({
   providedIn: 'root'
@@ -25,31 +25,49 @@ export class AuthService {
   }
 
   login(email: string, password: string): boolean {
-    // Numa app real, a verificação seria mais complexa
-    const userExists = this.users.find(user => user.email === email);
-    if (userExists && password === '123456') { // A senha continua "hardcoded" por enquanto
+    const user = this.users.find(u => u.email === email);
+    if (user && password === '123456') {
       localStorage.setItem('authToken', 'meu-token-secreto');
+      localStorage.setItem('currentUserId', user.id); 
       return true;
     }
     return false;
   }
 
-  register(userData: any): void {
+  register(userData: any): boolean {
+    
+    if (this.emailExists(userData.email)) {
+      alert('Este endereço de e-mail já foi registado. Por favor, tente fazer o login.');
+      return false; 
+    }
+  
+    
     const newUser: User = {
       id: new Date().getTime().toString(),
       name: userData.name,
       email: userData.email,
-      age: userData.age,
+      birthDate: new Date(userData.birthDate),
       profession: userData.profession,
       interests: userData.interests
     };
     this.users.push(newUser);
-    this.saveUsersToLocalStorage(); // Guarda a nova lista de utilizadores
+    this.saveUsersToLocalStorage();
     console.log('Novo utilizador registado e guardado:', this.users);
+    return true; 
   }
 
+  public getUserById(id: string): User | undefined {
+    return this.users.find(user => user.id === id);
+  }
+
+  public emailExists(email: string): boolean {
+
+    return this.users.some(user => user.email === email);
+  }
+  
+
   public getUsers(): User[] {
-    // Retorna uma cópia para proteger a lista original
+    
     return [...this.users];
   }
 
@@ -59,6 +77,12 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('authToken');
+    localStorage.removeItem('currentUserId'); 
     this.router.navigate(['/login']);
+  }
+
+  
+  public getCurrentUserId(): string | null {
+    return localStorage.getItem('currentUserId');
   }
 }

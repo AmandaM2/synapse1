@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular-core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { ProjectService } from '../../services/project.service';
 import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-create-project',
@@ -16,13 +17,14 @@ export class CreateProjectComponent implements OnInit {
 
   constructor(
     private projectService: ProjectService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.projectForm = new FormGroup({
       title: new FormControl(null, Validators.required),
-      authors: new FormControl(null, Validators.required),
+      authors: new FormControl(null), 
       summary: new FormControl(null, [Validators.required, Validators.maxLength(500)]),
       description: new FormControl(null, Validators.required),
       keywords: new FormControl(null, Validators.required),
@@ -30,32 +32,39 @@ export class CreateProjectComponent implements OnInit {
     });
   }
 
+  
   onSubmit(): void {
     if (this.projectForm.invalid) {
-      this.projectForm.markAllAsTouched(); // Mostra os erros se o utilizador tentar submeter inválido
+      this.projectForm.markAllAsTouched();
+      return; 
+    }
+
+  
+    const authorId = this.authService.getCurrentUserId();
+    const user = this.authService.getUserById(authorId!);
+
+    if (!authorId || !user) {
+      alert('Erro: não foi possível identificar o autor. Por favor, faça o login novamente.');
       return;
     }
 
     const formValue = this.projectForm.value;
-
-    // LIÇÃO IMPORTANTE: Transformação de Dados
-    // O input dá-nos uma string "angular, tech, science".
-    // O nosso serviço espera um array ['angular', 'tech', 'science'].
-    // O código abaixo faz essa transformação.
     const keywordsArray = formValue.keywords.split(',').map((keyword: string) => keyword.trim());
+    
+    // Concatenamos o nome do autor principal com os co-autores (se houver)
+    const finalAuthors = user.name + (formValue.authors ? `; ${formValue.authors}` : '');
 
-    // Criamos o objeto de dados final para enviar ao serviço
     const projectData = {
       title: formValue.title,
-      authors: formValue.authors,
       summary: formValue.summary,
       description: formValue.description,
-      keywords: keywordsArray // Usamos o array transformado
+      keywords: keywordsArray
     };
 
-    this.projectService.addProject(projectData);
+    this.projectService.addProject(projectData, authorId, finalAuthors);
 
     alert('Projeto publicado com sucesso!');
     this.router.navigate(['/']);
-  }
-}
+  } // O MÉTODO onSubmit SÓ TERMINA AQUI
+  
+} // A CLASSE SÓ TERMINA AQUI

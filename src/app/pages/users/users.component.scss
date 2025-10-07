@@ -26,6 +26,17 @@
     border-left: 5px solid var(--cor-primaria);
   }
   
+  a.user-card-link {
+    text-decoration: none; 
+    color: inherit; 
+    display: block; 
+    transition: transform 0.2s ease-in-out;
+  
+    &:hover {
+      transform: translateY(-5px); 
+    }
+  }
+
   .user-name {
     margin-top: 0;
     color: var(--cor-texto-principal);
@@ -34,7 +45,7 @@
   .user-profession {
     font-weight: 500;
     color: var(--cor-primaria);
-    background-color: #e8f0fe; // Um fundo azul claro
+    background-color: #e8f0fe; 
     padding: 0.25rem 0.5rem;
     border-radius: 4px;
     display: inline-block;

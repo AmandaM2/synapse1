@@ -10,6 +10,7 @@ import { PrivacyPolicyComponent } from './pages/privacy-policy/privacy-policy.co
 import { ProjectEditComponent } from './pages/project-edit/project-edit.component';
 import { UsersComponent } from './pages/users/users.component';
 import { SavedProjectsComponent } from './pages/saved-projects/saved-projects.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
 
 export const routes: Routes = [
@@ -17,6 +18,7 @@ export const routes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'cadastro', component: RegisterComponent},
     { path: 'usuarios', component: UsersComponent},
+    { path: 'perfil/:id', component: UserProfileComponent},
     { path: 'salvos', component: SavedProjectsComponent, canActivate:[authGuard]},
     { path: 'termos', component: TermsOfServiceComponent},
     { path: 'privacidade', component: PrivacyPolicyComponent},

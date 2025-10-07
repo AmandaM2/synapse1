@@ -8,19 +8,16 @@ import { Comment } from '../models/comment.model';
 })
 export class ProjectService {
   private readonly PROJECTS_STORAGE_KEY = 'synapse-projects';
-  private readonly SAVED_PROJECTS_KEY = 'synapse-saved-projects'; // NOVA CHAVE
-
+  private readonly SAVED_PROJECTS_KEY = 'synapse-saved-projects'; 
   private _allProjects: Project[] = [];
   private _projects$ = new BehaviorSubject<Project[]>([]);
   public projects$: Observable<Project[]> = this._projects$.asObservable();
 
-  // NOVO: Um Set para guardar os IDs dos projetos salvos.
-  // Usamos um Set porque ele automaticamente evita IDs duplicados.
   private savedProjectIds = new Set<string>();
 
   constructor() {
     this.loadProjectsFromLocalStorage();
-    this.loadSavedProjectIds(); // NOVO: Carregar os IDs salvos
+    this.loadSavedProjectIds(); 
   }
 
   private loadProjectsFromLocalStorage(): void {
@@ -36,7 +33,8 @@ export class ProjectService {
         {
           id: '1',
           title: 'Explorando Buracos Negros com Simulações Computacionais',
-          authors: 'Dra. Elisa Antunes',
+          authorId: 'system', // ID do autor (exemplo)
+    authorName: 'Dra. Elisa Antunes', // Nome do autor
           summary: 'Este projeto utiliza simulações avançadas...',
           description: 'Descrição completa...',
           publicationDate: new Date(),
@@ -99,13 +97,20 @@ export class ProjectService {
   }
 
 
-  addProject(projectData: any): void {
+  addProject(projectData: any, authorId: string, authorName: string): void {
     const newProject: Project = {
-      id: new Date().getTime().toString(), ...projectData,
-      publicationDate: new Date(), likes: 0, comments: []
+      id: new Date().getTime().toString(),
+      ...projectData,
+      authorId: authorId,
+      authorName: authorName,
+      publicationDate: new Date(),
+      likes: 0,
+      comments: []
     };
-    this._allProjects.unshift(newProject);
-    this.saveAndBroadcast();
+    // ...
+  }
+  public getProjectsByAuthorId(authorId: string): Project[] {
+    return this._allProjects.filter(p => p.authorId === authorId);
   }
 
   deleteProject(id: string): void {
