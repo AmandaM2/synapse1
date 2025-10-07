@@ -5,3 +5,5 @@
 h3 { font-family: var(--fonte-titulos); }
 .tags-container { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .tag-pill { background-color: #e8f0fe; color: #1967d2; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.9rem; font-weight: 500; }
+.user-projects { margin-top: 2rem; }
+.project-item { display: flex; justify-content: space-between; padding: 1rem; border-bottom: 1px solid var(--cor-borda); a { font-weight: bold; } span { color: var(--cor-texto-secundario); } &:last-child { border-bottom: none; } }

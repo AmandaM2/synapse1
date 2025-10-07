@@ -1,17 +1,39 @@
 <div class="profile-container">
-    <div *ngIf="user; else notFound">
-      <div class="profile-header">
-        <h1 class="user-name">{{ user.name }}</h1>
-        <p class="user-profession">{{ user.profession }}</p>
-      </div>
-      <div class="profile-details">
-        <h3>Interesses</h3>
-        <div class="tags-container">
-          <span *ngFor="let interest of user.interests" class="tag-pill">{{ interest }}</span>
-        </div>
+
+  <div *ngIf="user; else notFound">
+
+    <div class="profile-header">
+      <h1 class="user-name">{{ user.name }}</h1>
+      <p class="user-profession">{{ user.profession }}</p>
+    </div>
+
+    <div class="profile-details">
+      <h3>Interesses</h3>
+      <div class="tags-container">
+        <span *ngFor="let interest of user.interests" class="tag-pill">{{ interest }}</span>
       </div>
     </div>
-    <ng-template #notFound>
-      <h2>Utilizador não encontrado.</h2>
-    </ng-template>
+
+    <div class="user-projects">
+      <h3>Projetos Publicados</h3>
+      <div *ngIf="userProjects.length > 0; else noProjects">
+        <div *ngFor="let project of userProjects" class="project-item">
+          <a [routerLink]="['/projeto', project.id]">{{ project.title }}</a>
+          <span>{{ project.publicationDate | date: 'dd/MM/yyyy' }}</span>
+        </div>
+      </div>
+      <ng-template #noProjects>
+        <p>Este utilizador ainda não publicou nenhum projeto.</p>
+      </ng-template>
+    </div>
+
   </div>
+
+  <ng-template #notFound>
+    <div style="text-align: center;">
+      <h2>Utilizador não encontrado.</h2>
+      <p>O perfil que você está a procurar não existe.</p>
+    </div>
+  </ng-template>
+
+</div>
