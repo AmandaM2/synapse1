@@ -15,6 +15,7 @@ import { AuthService } from '../../services/auth.service';
 })
 export class HomeComponent {
   public projects$: Observable<Project[]>;
+  availableTags: string[] = [];
 
   constructor(
     private projectService: ProjectService,
@@ -23,7 +24,12 @@ export class HomeComponent {
     this.projects$ = this.projectService.projects$;
   }
 
-  // 3. Adicionar a lógica para saber se está logado
+    ngOnInit(): void {
+    // No início, vamos buscar todas as tags disponíveis
+    this.availableTags = this.projectService.getAllKeywords();
+  }
+
+
   get isLoggedIn(): boolean {
     return this.authService.isAuthenticated();
   }
@@ -40,5 +46,11 @@ export class HomeComponent {
   // 5. Adicionar um método para verificar o estado de cada cartão
   isProjectSaved(projectId: string): boolean {
     return this.projectService.isProjectSaved(projectId);
+  }
+
+   filterByTag(tag: string): void {
+    // Em vez de o componente filtrar, ele simplesmente DIZ ao serviço o que pesquisar.
+    // O Header fará a mesma coisa, então a lógica é centralizada.
+    this.projectService.filterProjects(tag);
   }
 }

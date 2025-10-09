@@ -23,7 +23,16 @@
     --fonte-corpo: 'Space Grotesk', sans-serif;
   }
 
-  // Em src/styles.scss
+
+main {
+    padding-top: 8px;
+  transition: margin-top 0.3s ease-in-out;
+}
+
+main.content-pushed {
+  margin-top: 250px; 
+  padding-top: 33px; 
+}
 
 body {
     margin: 0;
@@ -45,3 +54,16 @@ body {
       text-decoration: underline;
     }
   }
+
+  /* Definições para o Tema Escuro */
+body.dark-theme {
+  --cor-fundo: #121212;          // Preto suave
+  --cor-superficie: #1e1e1e;      // Cinza escuro para cartões e header
+  --cor-texto-principal: #e0e0e0;   // Branco suave
+  --cor-texto-secundario: #a0a0a0; // Cinza claro
+  --cor-borda: #333333;           // Borda escura
+
+  // Podemos também ajustar as cores primárias para terem um melhor contraste
+  --cor-primaria: #8c9eff; // Um azul mais claro para o modo escuro
+  --cor-primaria-escura: #536dfe;
+}

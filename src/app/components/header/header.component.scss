@@ -1,52 +1,120 @@
-/* Em app/components/header/header.component.scss */
+:host {
+  display: block;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
+}
 
 .main-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; // Distribui o espaço entre os 3 itens
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: var(--cor-superficie); /* Alterado para branco para mais contraste */
-  border-bottom: 1px solid var(--cor-borda);
+  padding: 0.5rem 1.5rem;
+  background-color: var(--cor-superficie);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  position: relative;
 }
- 
-.logo a {
-  font-family: var(--fonte-titulos); /* Usando a fonte de títulos */
-  font-size: 1.5rem;
-  font-weight: 700; /* Um pouco mais forte */
-  text-decoration: none;
-  color: var(--cor-primaria);
-}
- 
-.main-nav ul {
-  display: flex;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  gap: 1.5rem;
-}
- 
-.main-nav a {
-  font-family: var(--fonte-corpo); /* Usando a fonte de corpo */
-  text-decoration: none;
-  font-weight: 500;
-  padding: 0.5rem;
-  transition: color 0.2s ease-in-out;
 
-  /* ANTES: color: #333; */
-  color: var(--cor-texto-secundario); /* DEPOIS: Usando a variável para consistência */
- 
-  &:hover {
-    /* ANTES: color: var(--cor-primaria-escura); */
-    color: var(--cor-primaria); /* DEPOIS: Fica com a cor principal para um destaque mais forte */
+.logo {
+  flex-shrink: 0; // Impede que o logo encolha
+}
+
+.logo a {
+  font-family: var(--fonte-titulos);
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: var(--cor-primaria);
+  text-decoration: none;
+}
+
+.search-container {
+  position: relative;
+  &::before {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.4;
   }
 }
 
-/* BÔNUS: Estilo para o link da página ativa. 
-  No seu HTML, você usaria assim:
-  <a routerLink="/projetos" routerLinkActive="active-link">Projetos</a>
-*/
-.main-nav a.active-link {
-  color: var(--cor-primaria);
-  font-weight: 700; /* Mais destacado */
+.search-input {
+  width: 100%;
+  padding: 0.6rem 1rem 0.6rem 2.5rem;
+  border-radius: 20px;
+  border: 1px solid var(--cor-borda);
+  background-color: var(--cor-fundo);
+  font-family: inherit;
+  font-size: 0.9rem;
+  &:focus {
+    outline: none;
+    border-color: var(--cor-primaria);
+  }
+}
+
+.main-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+/* Esconde os elementos específicos de mobile por defeito */
+.menu-toggle,
+.mobile-menu,
+.mobile-search {
+  display: none;
+}
+
+/* ---- Media Query para Mobile ---- */
+@media (max-width: 850px) {
+  /* Esconde os elementos de desktop */
+  .desktop-search,
+  .main-nav {
+    display: none;
+  }
+  
+  /* Mostra o botão hambúrguer */
+  .menu-toggle {
+    display: block;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  
+  /* Estilos do menu que abre */
+  .mobile-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--cor-superficie);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    flex-direction: column;
+    gap: 1rem;
+
+    /* A classe que o [class.menu-open] adiciona */
+    &.menu-open {
+      display: flex;
+    }
+  }
+
+  .mobile-nav ul {
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    li {
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--cor-borda);
+      width: 100%;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
 }

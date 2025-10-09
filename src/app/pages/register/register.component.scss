@@ -1,4 +1,4 @@
-/* Estilos para o formulário de cadastro (reutilizando estilos de formulário) */
+
 
 .form-container {
   display: flex;
@@ -14,7 +14,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   border: 1px solid var(--cor-borda);
   width: 100%;
-  max-width: 500px; /* Tamanho ajustado para cadastro */
+  max-width: 500px; 
 
   h2, p {
     text-align: center;
@@ -154,5 +154,13 @@
         text-decoration: underline;
       }
     }
+  }
+}
+
+@media (max-width: 480px) {
+  
+  .form-card, .login-card {
+   
+    padding: 1.5rem 1rem;
   }
 }

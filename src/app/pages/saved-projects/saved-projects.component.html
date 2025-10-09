@@ -5,7 +5,7 @@
   
       <div *ngFor="let project of savedProjects" class="project-card">
         <h2 class="project-title">{{ project.title }}</h2>
-        <p class="project-authors"><strong>Autores:</strong> {{ project.authors }}</p>
+        <p class="project-authors"><strong>Autores:</strong> {{ project.authorName }}</p>
         <p class="project-summary">{{ project.summary }}</p>
   
         <div class="keywords-container" *ngIf="project.keywords && project.keywords.length > 0">

@@ -1,19 +1,19 @@
-/* Estilos para /novo-projeto e outras páginas com formulários */
+
 
 .form-container {
   display: flex;
   justify-content: center;
   padding: 4rem 2rem;
-  /* ANTES: background-color: #f4f7fc; */
-  background-color: var(--cor-fundo); /* DEPOIS: Usando a variável global */
+
+  background-color: var(--cor-fundo); 
 }
  
 .form-card {
-  /* ANTES: background-color: #ffffff; */
-  background-color: var(--cor-superficie); /* DEPOIS: Usando a variável global */
+  
+  background-color: var(--cor-superficie); 
   padding: 2.5rem;
   border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Sombra mais suave */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
   width: 100%;
   max-width: 700px;
  
@@ -21,7 +21,7 @@
     text-align: center;
   }
 
-  /* O h2 já pega o estilo de 'var(--cor-primaria)' globalmente */
+
   p {
     color: var(--cor-texto-secundario);
     margin-bottom: 2rem;
@@ -35,34 +35,32 @@
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
-    /* ANTES: color: #444; */
-    color: var(--cor-texto-secundario); /* DEPOIS: Usando a variável global */
+ 
+    color: var(--cor-texto-secundario); 
   }
  
   input, textarea {
     width: 100%;
     padding: 0.75rem;
-    /* ANTES: border: 1px solid #ccc; */
-    border: 1px solid var(--cor-borda); /* DEPOIS: Usando a variável global */
+    
+    border: 1px solid var(--cor-borda); 
     border-radius: 4px;
     font-size: 1rem;
     box-sizing: border-box; 
     font-family: inherit;
-    background-color: var(--cor-fundo); /* Fundo sutil para diferenciar do card */
+    background-color: var(--cor-fundo); 
     transition: all 0.2s ease-in-out;
  
     &:focus {
       outline: none;
       background-color: var(--cor-superficie);
-      /* ANTES: border-color: #3f51b5; */
-      border-color: var(--cor-primaria); /* DEPOIS: Usando a variável global */
-      /* ANTES: box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2); */
-      box-shadow: 0 0 0 3px rgba(46, 60, 254, 0.25); /* DEPOIS: Sombra com a cor primária */
+      border-color: var(--cor-primaria); 
+      box-shadow: 0 0 0 3px rgba(46, 60, 254, 0.25); 
     }
   }
 
   textarea {
-    min-height: 150px; /* Altura mínima para áreas de texto */
+    min-height: 150px; 
     resize: vertical;
   }
 }
@@ -70,27 +68,32 @@
 .submit-button {
   width: 100%;
   padding: 0.8rem;
-  /* ANTES: background-color: #3f51b5; */
-  background-color: var(--cor-terciaria); /* DEPOIS: Usando a variável global */
-  /* ANTES: color: white; */
-  color: var(--cor-superficie); /* DEPOIS: Usando a variável global */
+  background-color: var(--cor-terciaria); 
+  color: var(--cor-superficie); 
   border: none;
   border-radius: 4px;
   font-size: 1.1rem;
-  font-family: var(--fonte-titulos); /* Usando a fonte de títulos para destaque */
+  font-family: var(--fonte-titulos); 
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
  
   &:hover {
-    /* ANTES: background-color: #303f9f; */
-    background-color: var(--cor-secundaria); /* DEPOIS: Usando a variável global */
+    
+    background-color: var(--cor-secundaria); 
   }
  
   &:disabled {
-    /* ANTES: background-color: #b0bec5; */
-    background-color: var(--cor-borda); /* DEPOIS: Usando a variável global */
+
+    background-color: var(--cor-borda); 
     color: var(--cor-texto-secundario);
     cursor: not-allowed;
+  }
+}
+@media (max-width: 480px) {
+  
+  .form-card, .login-card {
+    
+    padding: 1.5rem 1rem;
   }
 }

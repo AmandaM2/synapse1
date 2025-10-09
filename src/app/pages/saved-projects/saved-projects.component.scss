@@ -148,3 +148,11 @@
       box-shadow: 0 0 0 2px var(--cor-primaria); // Usando a sua cor primária
     }
   }
+
+
+@media (max-width: 767px) {
+  .feed-container {
+    margin: 1rem;
+    padding: 0;
+  }
+}

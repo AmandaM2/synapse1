@@ -1,6 +1,15 @@
 <div class="feed-container">
   <h1 class="feed-title">Projetos Recentes</h1>
 
+    <!--<div class="tags-filter-container" *ngIf="availableTags.length > 0">
+    <button *ngFor="let tag of availableTags" class="tag-filter-pill" (click)="filterByTag(tag)">
+      {{ tag }}
+    </button>
+    <button class="tag-filter-pill clear-filter" (click)="filterByTag('')">
+      Limpar Filtro
+    </button>
+  </div>-->
+
   <div *ngIf="(projects$ | async) as projects; else loading">
 
     <div *ngIf="projects.length === 0" class="no-projects-message">
@@ -10,7 +19,7 @@
 
     <div *ngFor="let project of projects" class="project-card">
       <h2 class="project-title">{{ project.title }}</h2>
-      <p class="project-authors"><strong>Autores:</strong> {{ project.authors }}</p>
+      <p class="project-authors"><strong>Autores:</strong> {{ project.authorName }}</p>
       <p class="project-summary">{{ project.summary }}</p>
 
       <div class="keywords-container" *ngIf="project.keywords && project.keywords.length > 0">
@@ -19,24 +28,31 @@
         </span>
       </div>
 
-      <div class="card-actions" *ngIf="isLoggedIn">
-        <button (click)="onLike(project.id)" class="action-button like-button">
-          ❤️ Curtir
-        </button>
-        <button (click)="onToggleSave(project.id)" class="action-button save-button">
-          <ng-container *ngIf="!isProjectSaved(project.id)">⭐ Salvar</ng-container>
-          <ng-container *ngIf="isProjectSaved(project.id)">⭐ Remover</ng-container>
-        </button>
-      </div>
+      <div class="card-interaction">
+
+  <div *ngIf="isLoggedIn; else showMetrics" class="actions">
+    <button (click)="onLike(project.id)" class="action-button">❤️ Curtir ({{ project.likes }})</button>
+    <button (click)="onToggleSave(project.id)" class="action-button">
+      <span *ngIf="!isProjectSaved(project.id)">⭐ Salvar</span>
+      <span *ngIf="isProjectSaved(project.id)">⭐ Salvo</span>
+    </button>
+    <span>💬 {{ project.comments?.length || 0 }}</span>
+  </div>
+
+  <ng-template #showMetrics>
+    <div class="metrics">
+      <span>❤️ {{ project.likes }} Curtidas</span>
+      <span>💬 {{ project.comments?.length || 0 }} Comentários</span>
+    </div>
+  </ng-template>
+
+</div>
 
       <div class="card-footer">
         <span class="publication-date">
           Publicado em: {{ project.publicationDate | date: 'dd/MM/yyyy' }}
         </span>
-        <div class="card-metrics">
-          <span class="likes-count-feed">❤️ {{ project.likes }}</span>
-          <span class="comments-count-feed">💬 {{ project.comments?.length || 0 }}</span>
-        </div>
+        
         <a [routerLink]="['/projeto', project.id]" class="read-more-link">Ler Mais</a>
       </div>
     </div>

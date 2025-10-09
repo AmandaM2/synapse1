@@ -1,5 +1,5 @@
-<app-header></app-header>
+<app-header (menuToggled)="isMenuOpen = $event"></app-header>
 
-<main>
-    <router-outlet></router-outlet>
+<main [class.content-pushed]="isMenuOpen">
+  <router-outlet></router-outlet>
 </main>

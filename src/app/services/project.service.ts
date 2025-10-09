@@ -113,6 +113,13 @@ export class ProjectService {
     return this._allProjects.filter(p => p.authorId === authorId);
   }
 
+  public getAllKeywords(): string[] {
+  // O método flatMap primeiro cria um array de arrays de palavras-chave, e depois "achata-o" num único array.
+  const allKeywords = this._allProjects.flatMap(project => project.keywords);
+  // Usamos um Set para remover automaticamente as duplicadas e depois convertemos de volta para um array.
+  return [...new Set(allKeywords)];
+}
+
   deleteProject(id: string): void {
     this._allProjects = this._allProjects.filter(p => p.id !== id);
     this.saveAndBroadcast();

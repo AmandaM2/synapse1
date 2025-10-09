@@ -42,7 +42,8 @@ export class ProjectEditComponent implements OnInit {
   private initializeForm(project: Project): void {
     this.projectForm = new FormGroup({
       title: new FormControl(project.title, Validators.required),
-      authors: new FormControl(project.authors, Validators.required),
+authors: new FormControl(project.authorName),
+
       summary: new FormControl(project.summary, [Validators.required, Validators.maxLength(300)]),
       description: new FormControl(project.description, Validators.required)
     });
