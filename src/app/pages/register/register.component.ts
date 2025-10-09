@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators, AbstractControl, ValidationErrors, FormArray } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ModalComponent } from '../../components/modal/modal.component';
 
 
 export function passwordMatchValidator(control: AbstractControl): ValidationErrors | null {
@@ -30,7 +31,7 @@ function adultAgeValidator(control: AbstractControl): ValidationErrors | null {
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, ModalComponent],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
@@ -244,9 +245,21 @@ export class RegisterComponent implements OnInit {
     { name: 'Ciências Multidisciplinares', selected: false}
   ];
 
+  isModalOpen = false; 
+  modalTitle = '';
+
   constructor(
     private router: Router,
     private authService: AuthService) {}
+
+    openTermsModal(): void {
+    this.modalTitle = 'Termos de Serviço';
+    this.isModalOpen = true;
+  }
+
+    closeModal(): void {
+    this.isModalOpen = false;
+  }
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({

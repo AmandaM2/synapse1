@@ -14,7 +14,7 @@
 
   <nav class="main-nav">
     <ul>
-      <li><a routerLink="/usuarios">Utilizadores</a></li>
+      <li><a routerLink="/usuarios">Comunidade</a></li>
       <li *ngIf="isLoggedIn"><a routerLink="/salvos">Meus Salvos</a></li>
       <li *ngIf="isLoggedIn"><a routerLink="/novo-projeto">Publicar Projeto</a></li>
       <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>
@@ -29,7 +29,7 @@
   <div class="mobile-menu" [class.menu-open]="isMenuOpen">
     <nav class="mobile-nav">
       <ul>
-        <li><a routerLink="/usuarios">Utilizadores</a></li>
+        <li><a routerLink="/usuarios">Comunidade</a></li>
         <li *ngIf="isLoggedIn"><a routerLink="/salvos">Meus Salvos</a></li>
         <li *ngIf="isLoggedIn"><a routerLink="/novo-projeto">Publicar Projeto</a></li>
         <li *ngIf="!isLoggedIn"><a routerLink="/login">Login</a></li>

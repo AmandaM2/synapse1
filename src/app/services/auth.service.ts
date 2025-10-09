@@ -26,7 +26,7 @@ export class AuthService {
 
   login(email: string, password: string): boolean {
     const user = this.users.find(u => u.email === email);
-    if (user && password === '123456') {
+    if (user && password === 'abcd1234') {
       localStorage.setItem('authToken', 'meu-token-secreto');
       localStorage.setItem('currentUserId', user.id); 
       return true;
