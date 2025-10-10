@@ -52,19 +52,26 @@ export class ProjectService {
     this._projects$.next(this._allProjects);
   }
 
-  public filterProjects(searchTerm: string): void {
-    if (!searchTerm) {
-      this._projects$.next(this._allProjects);
-      return;
-    }
-    const lowerCaseSearchTerm = searchTerm.toLowerCase();
-    const filtered = this._allProjects.filter(project =>
-      project.title.toLowerCase().includes(lowerCaseSearchTerm) ||
-      project.summary.toLowerCase().includes(lowerCaseSearchTerm) ||
-      project.keywords.some(k => k.toLowerCase().includes(lowerCaseSearchTerm))
-    );
-    this._projects$.next(filtered);
+public filterProjects(searchTerm: string): void {
+  const allProjects = this._allProjects;
+  if (!searchTerm) {
+    this._projects$.next(allProjects);
+    return;
   }
+
+  const lowerCaseSearchTerm = searchTerm.toLowerCase();
+  const filtered = allProjects.filter(project => {
+    const titleMatch = project.title.toLowerCase().includes(lowerCaseSearchTerm);
+    const summaryMatch = project.summary.toLowerCase().includes(lowerCaseSearchTerm);
+    
+    // A CORREÇÃO ESTÁ AQUI:
+    // Primeiro verificamos se project.keywords existe, e só depois usamos o .some()
+    const keywordsMatch = project.keywords && project.keywords.some(k => k.toLowerCase().includes(lowerCaseSearchTerm));
+
+    return titleMatch || summaryMatch || keywordsMatch;
+  });
+  this._projects$.next(filtered);
+}
 
   private loadSavedProjectIds(): void {
     const savedIdsJson = localStorage.getItem(this.SAVED_PROJECTS_KEY);
@@ -107,6 +114,9 @@ export class ProjectService {
       likes: 0,
       comments: []
     };
+
+    this._allProjects.unshift(newProject);
+    this.saveAndBroadcast(); 
     // ...
   }
   public getProjectsByAuthorId(authorId: string): Project[] {

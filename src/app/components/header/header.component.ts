@@ -42,8 +42,9 @@ isDarkMode: boolean;
   }
 
   onSearch(): void {
-    this.projectService.filterProjects(this.searchTerm);
-  }
+  console.log('--- CHECKPOINT 1: Pesquisa acionada no Header com o termo:', this.searchTerm);
+  this.projectService.filterProjects(this.searchTerm);
+}
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
